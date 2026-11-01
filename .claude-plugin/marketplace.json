@@ -3,14 +3,14 @@
   "owner": { "name": "amenolabode", "url": "https://github.com/amenolabode" },
   "metadata": {
     "description": "A brand illustration-system skill for Claude and other agents: from brand idea to a researched, vector-built illustration system.",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "plugins": [
     {
       "name": "brand-illustration-systems",
       "source": "./",
       "description": "Derive, present (three directions) and build brand illustration systems as editable vector, with audit and render tools.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "category": "design",
       "keywords": ["illustration", "branding", "icons", "pattern", "svg"]
     }
