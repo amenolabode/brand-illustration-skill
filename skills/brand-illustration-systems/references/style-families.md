@@ -70,6 +70,13 @@ things from all sides"). See `cowrywise-example.md`.
 **Construction:** a seamless tile from source primitives; line one tone darker than its face; pattern never
 outweighs the silhouette; pattern-free reduced state.
 **Reduces:** the pattern drops away at small sizes, leaving the silhouette.
+**Two variants:**
+- *Pattern on the object* (Cowrywise): one source pattern fills the silhouettes of objects.
+- *Patterned planes* (cut-paper editorial): a flat, frontal figure built from oversized geometric shapes, where each
+  plane owns its own simple pattern (broad stripes on the jumper, dots on the trousers, fine contour lines on the
+  hair). Patterns are assigned by role, depth comes from overlap and counter-shapes, and small reward objects spread
+  the palette. See `reference-transfer.md` for the full decomposition.
+
 **Fails when:** every asset becomes "patterned object on a coloured square". That is one composition, not a system.
 Vary scale, crop and scene type, and don't make pattern the default for every brand.
 

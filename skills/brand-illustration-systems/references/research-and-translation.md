@@ -126,4 +126,5 @@ Use this when the user shares an existing illustration system (images, GIFs, a s
 5. **List the execution qualities** a new system must keep when the source changes (SKILL.md, Phase 7). This list becomes the checklist for the side-by-side review.
 6. **Describe the layer-by-layer reconstruction** for each mode, so the analysis can be checked by rebuilding it.
 
-`cowrywise-example.md` is a complete analysis of this kind.
+`cowrywise-example.md` is a complete analysis of this kind. For a single illustration that must be recreated and
+applied to a new subject, use `reference-transfer.md`.

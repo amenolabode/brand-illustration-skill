@@ -36,6 +36,16 @@ BAD = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
 failures = []
 
 
+def write_png(path, w, h, color):
+    import struct
+    import zlib
+    raw = b"".join(b"\x00" + bytes(v for x in range(w) for v in color(x, y)) for y in range(h))
+    chunk = lambda t, d: struct.pack(">I", len(d)) + t + d + struct.pack(">I", zlib.crc32(t + d) & 0xFFFFFFFF)
+    with open(path, "wb") as f:
+        f.write(b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", w, h, 8, 2, 0, 0, 0))
+                + chunk(b"IDAT", zlib.compress(raw)) + chunk(b"IEND", b""))
+
+
 def run(name, args, expect=(), code=0, cwd=None):
     env = {k: v for k, v in os.environ.items() if k not in ("PYTHONIOENCODING", "PYTHONUTF8")}
     p = subprocess.run(args, cwd=cwd or ROOT, env=env, capture_output=True)
@@ -112,6 +122,15 @@ def main():
         run("render: svg", py("render_png.py", good, "--out-dir", tmp, "--width", "256"), [os.path.join(tmp, "good.png")])
     else:
         print("[skip] render: no renderer on this machine")
+    if "chrome" in which:
+        run("render: silhouette test", py("render_png.py", good, "--silhouette", "--out-dir", tmp, "--width", "128"),
+            [os.path.join(tmp, "good-silhouette.png")])
+
+    flat_png, glow_png = os.path.join(tmp, "flat.png"), os.path.join(tmp, "glow.png")
+    write_png(flat_png, 120, 120, lambda x, y: (0, 0, 0) if 40 < x < 80 and 40 < y < 80 else (253, 243, 141))
+    write_png(glow_png, 120, 120, lambda x, y: (253, min(255, 238 + int(16 - ((x - 60) ** 2 + (y - 60) ** 2) ** .5 / 5)), 141))
+    run("raster check: solid field passes", py("raster_check.py", flat_png), ["[PASS]", "100% solid"])
+    run("raster check: glow fails", py("raster_check.py", glow_png), ["[FAIL]", "glow"], code=1)
 
     node = shutil.which("node")
     if node:

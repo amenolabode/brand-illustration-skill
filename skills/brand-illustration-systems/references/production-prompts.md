@@ -100,3 +100,11 @@ content differed. Causes: the sample spec demanded a pattern tile, the overview 
 warned when no `<pattern>` existed, and the only worked example was pattern-led. Fixes: directions are now idea plus
 family, the three must differ in family, samples use real touchpoint moments, and the audit checks against the chosen
 family.
+
+## Known failure: the drifting field (editorial transfer run)
+
+An image model recreating a flat editorial piece added a soft yellow glow to a background that was perfectly uniform
+in the reference. A correction pass removed the glow, but the field was still noisy, not one colour (`raster_check.py`:
+about 80% solid against 98% in the original). Flat styles depend on exactly that solidity. Run `raster_check.py` on
+every raster exploration, say what it found, and rebuild the chosen direction as vector with a single background fill.
+

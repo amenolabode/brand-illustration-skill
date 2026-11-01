@@ -17,6 +17,8 @@ def load(name):
 
 
 audit = load("system_audit")
+raster = load("raster_check")
+render = load("render_png")
 
 
 def svg(body, defs=""):
@@ -77,6 +79,41 @@ class AuditTests(unittest.TestCase):
 
     def test_contrast_maths(self):
         self.assertAlmostEqual(audit.contrast("#000000", "#FFFFFF"), 21.0, places=1)
+
+
+class RasterCheckTests(unittest.TestCase):
+    def png(self, color, w=60, h=60):
+        import struct
+        import zlib
+        raw = b"".join(b"\x00" + bytes(v for x in range(w) for v in color(x, y)) for y in range(h))
+        chunk = lambda t, d: struct.pack(">I", len(d)) + t + d + struct.pack(">I", zlib.crc32(t + d) & 0xFFFFFFFF)
+        f = tempfile.NamedTemporaryFile(suffix=".png", delete=False)
+        f.write(b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", w, h, 8, 2, 0, 0, 0))
+                + chunk(b"IDAT", zlib.compress(raw)) + chunk(b"IEND", b""))
+        f.close()
+        self.addCleanup(os.unlink, f.name)
+        return f.name
+
+    def test_solid_field_passes(self):
+        r = raster.check(self.png(lambda x, y: (0, 0, 0) if 20 < x < 40 and 20 < y < 40 else (250, 240, 140)))
+        self.assertEqual(r["fail"] + r["warn"], [])
+
+    def test_gradient_field_fails(self):
+        r = raster.check(self.png(lambda x, y: (250, 220 + x // 3, 140)))
+        self.assertTrue(any("glow" in m for m in r["fail"]))
+
+    def test_noisy_field_warns(self):
+        r = raster.check(self.png(lambda x, y: (250, 240 + (x * 7 + y * 13) % 5, 140)))
+        self.assertTrue(any("not one solid colour" in m for m in r["warn"]))
+
+
+class RenderHelperTests(unittest.TestCase):
+    def test_strip_field_removes_only_full_canvas_rects(self):
+        txt = '<rect width="100" height="80" fill="#fff"/><rect x="5" width="100" height="80"/><rect width="10" height="10"/>'
+        out = render.strip_field(txt, 100, 80)
+        self.assertNotIn('fill="#fff"', out)
+        self.assertIn('x="5"', out)
+        self.assertIn('width="10"', out)
 
 
 class SkillContractTests(unittest.TestCase):

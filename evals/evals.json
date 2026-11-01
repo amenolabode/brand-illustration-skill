@@ -42,6 +42,12 @@
       "prompt": "Design an illustration system for Kite, a youth investing app. Go straight to directions, no questions.",
       "expected_output": "States assumptions instead of an intake, including a touchpoint map with tiers and emotional temperature and two proof moments. Writes 'X but not Y' tone fences. Proposes three directions in different families, drawing ideas from at least two wells (the brand's own assets such as logo or type, a source world, a story or cast), and does not default to the Cowrywise/Bedrock pattern-on-object look. Stops at the checkpoint.",
       "files": []
+    },
+    {
+      "id": 8,
+      "prompt": "Recreate this illustration, explain step by step how you did it, then apply the direction to a laptop. [attached: a flat editorial figure with patterned clothing, gifts and a cat on a yellow field]",
+      "expected_output": "Uses the Transfer mode: a seven-layer decomposition (field, large shapes, palette roles, pattern owners, depth by overlap, reward objects, rendering), a recreation used to check the rules and labelled as a study, and a written role map before the laptop is drawn. The laptop keeps pattern owners by role, keeps the frontal projection, replaces the reference's props with objects from the laptop's world, and passes the silhouette test. Raster outputs are run through raster_check.py and reported; the transfer is rebuilt or offered as vector.",
+      "files": []
     }
   ]
 }

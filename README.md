@@ -106,10 +106,19 @@ Just describe the brand. The skill picks itself up from its description:
 
 > These are Cowrywise's illustrations. What inspired the patterns, and how would I rebuild them?
 
+> Recreate this illustration, explain how you did it, then apply the direction to a laptop.
+
 > Add a "Withdraw" icon and a "Pension" cover to our existing system (spec attached).
 
-It works in four modes: **Design** (new system), **Reverse-engineer** (analyse a reference), **Extend** (new assets
-for an existing system) and **Audit** (critique illustrations or a direction).
+It works in five modes: **Design** (new system), **Reverse-engineer** (analyse a reference system), **Transfer**
+(recreate one illustration and apply its direction to a new subject), **Extend** (new assets for an existing system)
+and **Audit** (critique illustrations or a direction).
+
+**Transfer** breaks a reference into seven layers (field, large shapes, palette roles, pattern owners, depth by
+overlap, reward objects, rendering), recreates it to prove the rules are complete, then maps each element's *role* onto
+the new subject. The striped jumper's role (the largest patterned curve) might go to a laptop's cable loop, and the
+reference's props are replaced with props from the laptop's world rather than copied. A close recreation is treated as
+a study, never a deliverable.
 
 ---
 
@@ -178,6 +187,14 @@ The rules follow the family: a filter is a failure in a flat spot but fine in a 
 Every family: live `<text>` warns, and any `<pattern>` whose lines read as bands or contrast too strongly warns.
 Only the pattern family warns when there is no pattern.
 
+Two more checks:
+
+- `render_png.py --silhouette` renders every shape black with the background removed (the large-shape test), and
+  `--grey` renders it in greyscale.
+- `raster_check.py image.png` checks image-model exploration for what flat styles depend on. It FAILs a background
+  with a glow, vignette or gradient, WARNs one that is noisy rather than one solid fill, and lists the dominant
+  colours.
+
 ---
 
 ## What's inside
@@ -193,18 +210,20 @@ skills/brand-illustration-systems/
 │   ├── reference-systems.md         case notes on Klarna, Monzo, Cash App, Revolut, Duolingo and others
 │   ├── direction-options.md         making three options truly different; sheet spec
 │   ├── research-and-translation.md  source research, scorecard, worksheet, reference analysis
+│   ├── reference-transfer.md        recreate one illustration and apply it to a new subject
 │   ├── system-spec-and-validation.md  production spec, proof matrix, failure diagnoses
 │   ├── production-prompts.md        production route per family, exploration-only prompts, known failures
 │   └── cowrywise-example.md         a full analysis of one pattern-led reference system
 ├── scripts/
 │   ├── direction_sheet.py           three-option overview sheet (HTML) from JSON
 │   ├── system_audit.py              family-aware audit for SVGs
-│   └── render_png.py                SVG/HTML → PNG (Chrome, rsvg-convert, cairosvg, Inkscape)
+│   ├── raster_check.py              flat-field and palette check for raster exploration
+│   └── render_png.py                SVG/HTML → PNG (Chrome, rsvg-convert, cairosvg, Inkscape); silhouette, grey
 └── templates/
     ├── flat-spot-template.mjs       flat spots + primitive character + phone-frame context
     └── build-template.mjs           pattern-led: tokens → pattern → per-mode construction → motion
 examples/bedrock/                    complete worked run with spec page
-evals/evals.json                     behaviour evals (intake, varied families, fixed family, translations, build, analysis)
+evals/evals.json                     behaviour evals (intake, varied families, fixed family, translations, build, analysis, transfer)
 tools/                               smoke test and packaging
 tests/                               unit tests
 ```

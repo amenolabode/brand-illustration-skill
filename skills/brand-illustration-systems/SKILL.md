@@ -1,6 +1,6 @@
 ---
 name: brand-illustration-systems
-description: Designs brand illustration systems for any brand. It maps the brand's touchpoints (empty states, onboarding, success moments, marketing heroes), then proposes three genuinely different directions, each pairing an idea from the brand with a rendering family (flat spot, character-led, expressive line, soft 3D, pattern-led, technical, brand device or collage, as in Klarna, Monzo, Cash App, Revolut, Duolingo, Mailchimp or Cowrywise). It asks first whether the user has a preferred direction, shows the three options on one overview sheet with a recommendation, and builds the full system only after the user picks. Use whenever the user wants illustrations, an illustration style or system, spot illustrations, icon families, empty-state or onboarding art, editorial or campaign imagery, brand patterns, 3D brand assets or illustration motion created, refreshed, extended, audited or reverse-engineered from a reference, even if they don't say "system".
+description: Designs brand illustration systems for any brand. It maps the brand's touchpoints (empty states, onboarding, success moments, marketing heroes), then proposes three genuinely different directions, each pairing an idea from the brand with a rendering family (flat spot, character-led, expressive line, soft 3D, pattern-led, technical, brand device or collage, as in Klarna, Monzo, Cash App, Revolut, Duolingo, Mailchimp or Cowrywise). It asks first whether the user has a preferred direction, shows the three options on one overview sheet with a recommendation, and builds the full system only after the user picks. Use whenever the user wants illustrations, an illustration style or system, spot illustrations, icon families, empty-state or onboarding art, editorial or campaign imagery, brand patterns, 3D brand assets or illustration motion created, refreshed, extended, audited, reverse-engineered, or recreated from a reference and applied to a new subject, even if they don't say "system".
 ---
 
 # Brand Illustration Systems
@@ -21,6 +21,7 @@ Reply in the user's language. Keep the process visible but light: short explanat
 |---|---|---|
 | A new illustration system | **Design**: full workflow below | Phase 1 |
 | To understand or replicate a reference system | **Reverse-engineer** | `references/research-and-translation.md` §Reference analysis, `references/reference-systems.md` |
+| To recreate one illustration and apply its direction to a new subject ("do this, but for a laptop") | **Transfer** | `references/reference-transfer.md`: decompose in seven layers, recreate to check the rules, map roles, rebuild for the new subject |
 | New assets for an existing system | **Extend** | Read their spec and touchpoint map, then Phase 7 for only the requested assets |
 | Feedback on illustrations or a direction | **Audit** | `references/system-spec-and-validation.md`, `scripts/system_audit.py` |
 
@@ -40,7 +41,8 @@ Run them with `python3` and the full path; on Windows use `python` or `py -3`.
 |---|---|
 | `direction_sheet.py` | Build the three-option overview: each direction's family, signature element, the same spot moment and the same scene moment, palette, idea, rules and risk, with a recommendation |
 | `system_audit.py` | Check SVG assets against the chosen family (`--family flat|character|line|3d|pattern|technical|device|collage`): rasters, filters, gradients, colour discipline, pattern weight where relevant |
-| `render_png.py` | Render SVG or HTML to PNG (headless Chrome/Chromium, rsvg-convert, cairosvg, Inkscape) so you can look at your work |
+| `render_png.py` | Render SVG or HTML to PNG (headless Chrome/Chromium, rsvg-convert, cairosvg, Inkscape) so you can look at your work; `--silhouette` and `--grey` for the large-shape and value tests |
+| `raster_check.py` | Check raster exploration (image-model PNGs) for a background that isn't one solid fill (glow, vignette, noise) and a smeared palette |
 
 Templates (Node, no dependencies): `templates/flat-spot-template.mjs` (flat spot illustrations with a primitive-built
 character and one accent) and `templates/build-template.mjs` (pattern-led system with isometric scene and extruded
@@ -114,7 +116,8 @@ Each direction gets exactly these, built from the brand's tokens:
 
 Build 2D samples as SVG. For 3D, approximate in SVG with gradients and label it, or use an image model labelled as
 exploration. The production system must still come with real source files. Run `system_audit.py --family <family>` on
-every SVG and render everything.
+every SVG, render everything, and render the spot with `--silhouette`: if the subject isn't recognisable as a black
+shape, fix the large shapes before adding pattern or detail. Check raster exploration with `raster_check.py`.
 
 ### Phase 6: Show the three options, then stop (checkpoint)
 
@@ -158,7 +161,8 @@ UI; a defined reduced state; and motifs that sit in the same place every time.
 Run `system_audit.py` with the family on every asset, render everything and check
 (`references/system-spec-and-validation.md`):
 
-- Subjects are recognisable without explanation, at their real touchpoint size.
+- Subjects are recognisable without explanation, at their real touchpoint size, and as a silhouette
+  (`render_png.py --silhouette`) before pattern and colour.
 - Sensitive moments are handled with restraint, and celebratory moments carry the most expression.
 - A designer could make a new asset for an unlisted screen from the spec alone (the unseen-asset test).
 - The system is related across tiers without depending only on colour.
@@ -191,6 +195,9 @@ Run `system_audit.py` with the family on every asset, render everything and chec
 - A character or joke appearing on a sensitive moment (fraud, loss, debt, error).
 - Drop shadows, gradients or filters used to rescue weak forms in a flat family; inconsistent camera or lighting in 3D.
 - Imitating a living illustrator's or studio's signature style; labelling an invented motif as belonging to a culture.
+  A close recreation of someone's piece is a study, never a deliverable.
+- In a transfer: the reference's props copied into the new subject, patterns moved off the roles they own, or the
+  projection changed (frontal reference, three-quarter result).
 
 ## Honesty and limits
 
@@ -210,6 +217,7 @@ Run `system_audit.py` with the family on every asset, render everything and chec
 | `references/reference-systems.md` | Case notes: Klarna, Monzo, Cash App, Revolut, Mailchimp, Duolingo, Atlassian, Robinhood, Dropbox, Cowrywise |
 | `references/direction-options.md` | Forming three distinct directions; the overview sheet spec |
 | `references/research-and-translation.md` | Source-world research, scorecard, reference analysis |
+| `references/reference-transfer.md` | Recreating one illustration and applying its direction to a new subject: seven layers, role map, checks |
 | `references/system-spec-and-validation.md` | Production spec, proof matrix, failure diagnoses |
 | `references/production-prompts.md` | Production routes per family, exploration-only image prompts, known failures |
 | `references/cowrywise-example.md` | One full analysis of a pattern-led system (an example, not a template) |
