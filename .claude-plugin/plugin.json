@@ -2,9 +2,9 @@
   "name": "brand-illustration-systems",
   "description": "Turn a brand idea into a distinctive, explainable and scalable illustration system: intake (including your preferred direction), source-world research, three direction options at a checkpoint, then a full vector proof family (technical scene, pictograms, editorial objects, motion, spec), with audit and render tools.",
   "version": "1.0.0",
-  "author": { "name": "OWNER" },
-  "homepage": "https://github.com/OWNER/brand-illustration-skill",
-  "repository": "https://github.com/OWNER/brand-illustration-skill",
+  "author": { "name": "amenolabode" },
+  "homepage": "https://github.com/amenolabode/brand-illustration-skill",
+  "repository": "https://github.com/amenolabode/brand-illustration-skill",
   "license": "MIT",
   "keywords": ["illustration", "branding", "icons", "pattern", "design-system", "svg", "motion"]
 }

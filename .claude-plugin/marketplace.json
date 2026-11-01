@@ -1,6 +1,6 @@
 {
   "name": "brand-illustration-skill",
-  "owner": { "name": "OWNER", "url": "https://github.com/OWNER" },
+  "owner": { "name": "amenolabode", "url": "https://github.com/amenolabode" },
   "metadata": {
     "description": "A brand illustration-system skill for Claude and other agents: from brand idea to a researched, vector-built illustration system.",
     "version": "1.0.0"

@@ -1,6 +1,6 @@
 # Brand Illustration Systems: a skill for Claude and other AI agents
 
-[![Tests](https://github.com/OWNER/brand-illustration-skill/actions/workflows/test.yml/badge.svg)](https://github.com/OWNER/brand-illustration-skill/actions/workflows/test.yml)
+[![Tests](https://github.com/amenolabode/brand-illustration-skill/actions/workflows/test.yml/badge.svg)](https://github.com/amenolabode/brand-illustration-skill/actions/workflows/test.yml)
 
 ![Bedrock example: eight editorial objects built from one rule set](docs/images/03-story-covers.png)
 
@@ -52,13 +52,13 @@ an honest risk and a recommendation. Nothing else is built until you choose.
 
 ### Claude Code: plugin marketplace (recommended)
 ```
-/plugin marketplace add OWNER/brand-illustration-skill
+/plugin marketplace add amenolabode/brand-illustration-skill
 /plugin install brand-illustration-systems@brand-illustration-skill
 ```
 
 ### Claude Code: manual
 ```bash
-git clone https://github.com/OWNER/brand-illustration-skill.git
+git clone https://github.com/amenolabode/brand-illustration-skill.git
 cp -r brand-illustration-skill/skills/brand-illustration-systems ~/.claude/skills/        # personal
 # or: cp -r brand-illustration-skill/skills/brand-illustration-systems .claude/skills/    # per project
 ```
