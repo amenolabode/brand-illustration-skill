@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 """Audit SVG illustration assets for the failures that break a system.
 
-  python3 system_audit.py assets/*.svg            # human-readable report
-  python3 system_audit.py assets/*.svg --json     # machine-readable
+  python3 system_audit.py --family flat assets/*.svg     # human-readable report
+  python3 system_audit.py --family 3d assets/*.svg --json
 
-FAIL  embedded raster images; filters (drop shadows, blur, lighting)
-WARN  gradients; live <text>; more than one saturated anchor hue; pattern lines heavy relative to their gaps;
-      pattern line contrast too high against its face (ink on pastel); no <pattern> at all
+Checks are judged against the rendering family (see references/style-families.md):
+  flat, technical, device, pattern   rasters and filters FAIL; gradients WARN; one saturated anchor hue
+  character                          rasters FAIL; filters and gradients WARN; up to two saturated hues
+  line                               rasters and filters WARN (texture is allowed); up to two saturated hues
+  3d, collage                        rasters, filters and gradients allowed; up to two (3d) or three (collage) hues
+Every family: live <text> WARN; pattern lines heavy or too contrasty (when patterns exist) WARN.
+pattern family only: no <pattern> WARN.
 Exit code 1 if any file has a FAIL. Standard library only.
 """
 import argparse
@@ -75,7 +79,23 @@ def saturated_hues(colors):
     return hues
 
 
-def audit(path, max_anchor=1):
+PROFILES = {
+    #            raster   filter   gradient anchors require_pattern
+    "flat":      ("fail", "fail", "warn", 1, False),
+    "technical": ("fail", "fail", "warn", 1, False),
+    "device":    ("fail", "fail", "warn", 1, False),
+    "pattern":   ("fail", "fail", "warn", 1, True),
+    "character": ("fail", "warn", "warn", 2, False),
+    "line":      ("warn", "warn", None, 2, False),
+    "3d":        (None, None, None, 2, False),
+    "collage":   (None, None, None, 3, False),
+}
+
+
+def audit(path, family="flat", max_anchor=None):
+    raster_lvl, filter_lvl, grad_lvl, anchors, require_pattern = PROFILES[family]
+    if max_anchor is not None:
+        anchors = max_anchor
     res = {"file": path, "fail": [], "warn": [], "info": []}
     try:
         root = ET.parse(path).getroot()
@@ -86,24 +106,28 @@ def audit(path, max_anchor=1):
     tags = [local(e.tag) for e in els]
     raw = open(path, encoding="utf-8", errors="replace").read()
 
+    def flag(level, msg):
+        if level:
+            res[level].append(msg)
+
     if "image" in tags or "data:image/png" in raw or "data:image/jpeg" in raw:
-        res["fail"].append("embedded raster image: a system proof must be vector")
+        flag(raster_lvl, f"embedded raster image: a {family} asset should be vector")
     if "filter" in tags or any(e.get("filter") for e in els) or re.search(r"filter\s*:\s*(drop-shadow|blur|url)", raw):
-        res["fail"].append("filter found (drop shadow / blur / lighting): use construction, not rendering")
+        flag(filter_lvl, f"filter found (drop shadow / blur / lighting): {family} uses construction, not rendering effects")
     if "linearGradient" in tags or "radialGradient" in tags:
-        res["warn"].append("gradient found: allowed only if the source world demands it")
+        flag(grad_lvl, f"gradient found: unusual for the {family} family; keep it only if the direction calls for it")
     if "text" in tags:
         res["warn"].append("live <text>: outline it, or confirm the font ships with the asset")
 
     colors = {norm_hex(m.group(0)) for m in HEX.finditer(raw)}
     hues = saturated_hues(colors)
-    if len(hues) > max_anchor:
+    if len(hues) > anchors:
         res["warn"].append(f"{len(hues)} saturated hues (around {', '.join(f'{h:.0f}°' for h in hues)}): "
-                           f"keep one anchor and let the faces stay pale")
+                           f"{family} allows {anchors}; keep colour roles disciplined")
 
     patterns = [e for e in els if local(e.tag) == "pattern"]
-    if not patterns:
-        res["warn"].append("no <pattern>: is the source grammar living only in hand-drawn texture?")
+    if require_pattern and not patterns:
+        res["warn"].append("no <pattern>: a pattern-led asset should build its surface from a pattern tile")
     for p in patterns:
         pid = p.get("id", "?")
         h = num(p.get("height"))
@@ -131,7 +155,7 @@ def audit(path, max_anchor=1):
                 res["warn"].append(f"pattern '{pid}': line {strokes[0][0]} on face {face} has contrast {cr:.1f}:1; "
                                    f"use one tone step darker than the face (about 1.2-2:1)")
 
-    res["info"].append(f"{len(patterns)} pattern(s)")
+    res["info"].append(f"family {family}, {len(patterns)} pattern(s)")
     res["info"].append(f"{len(els)} elements, {len(colors)} colours")
     return res
 
@@ -140,9 +164,10 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("files", nargs="+")
     ap.add_argument("--json", action="store_true")
-    ap.add_argument("--max-anchor", type=int, default=1, help="saturated hues allowed (default 1)")
+    ap.add_argument("--family", choices=sorted(PROFILES), default="flat", help="rendering family (default flat)")
+    ap.add_argument("--max-anchor", type=int, help="override the family's allowed saturated hues")
     a = ap.parse_args()
-    results = [audit(f, a.max_anchor) for f in a.files]
+    results = [audit(f, a.family, a.max_anchor) for f in a.files]
     if a.json:
         print(json.dumps(results, indent=2))
     else:

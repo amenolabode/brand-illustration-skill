@@ -24,11 +24,11 @@ def svg(body, defs=""):
 
 
 class AuditTests(unittest.TestCase):
-    def check(self, text):
+    def check(self, text, family="flat"):
         with tempfile.NamedTemporaryFile("w", suffix=".svg", delete=False, encoding="utf-8") as f:
             f.write(text)
         try:
-            return audit.audit(f.name)
+            return audit.audit(f.name, family=family)
         finally:
             os.unlink(f.name)
 
@@ -61,6 +61,20 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(r["fail"], [])
         self.assertEqual(r["warn"], [])
 
+    def test_family_profiles(self):
+        grad = svg('<rect width="9" height="9" fill="url(#g)"/>',
+                   '<linearGradient id="g"><stop stop-color="#fff"/><stop offset="1" stop-color="#ccc"/></linearGradient>')
+        self.assertTrue(any("gradient" in m for m in self.check(grad, "flat")["warn"]))
+        self.assertFalse(any("gradient" in m for m in self.check(grad, "3d")["warn"] + self.check(grad, "3d")["fail"]))
+        two = svg('<rect fill="#E2531F"/><rect fill="#1F7AE0"/>')
+        self.assertTrue(any("saturated" in m for m in self.check(two, "flat")["warn"]))
+        self.assertFalse(any("saturated" in m for m in self.check(two, "character")["warn"]))
+
+    def test_missing_pattern_only_matters_for_pattern_family(self):
+        plain = svg('<rect width="9" height="9" fill="#E2531F"/>')
+        self.assertFalse(any("pattern" in m for m in self.check(plain, "flat")["warn"]))
+        self.assertTrue(any("pattern" in m for m in self.check(plain, "pattern")["warn"]))
+
     def test_contrast_maths(self):
         self.assertAlmostEqual(audit.contrast("#000000", "#FFFFFF"), 21.0, places=1)
 
@@ -80,6 +94,15 @@ class SkillContractTests(unittest.TestCase):
         self.assertIn("Do you already have a direction in mind?", self.text)
         self.assertIn("three directions", self.text.lower())
         self.assertIn("checkpoint", self.text.lower())
+
+    def test_directions_vary_family(self):
+        low = self.text.lower()
+        self.assertIn("rendering family", low)
+        self.assertIn("at most one may be pattern-led", low)
+        with open(os.path.join(SKILL, "references", "style-families.md"), encoding="utf-8") as f:
+            fam = f.read().lower()
+        for name in ("flat", "character", "line", "3d", "pattern", "technical", "device", "collage"):
+            self.assertIn(name, fam)
 
     def test_referenced_files_exist(self):
         for rel in set(re.findall(r"`((?:references|scripts|templates)/[\w./-]+)`", self.text)):

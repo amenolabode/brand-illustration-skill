@@ -80,10 +80,10 @@ def main():
     spec = {
         "brand": "Smoke", "tenet": "Testing — with non-ASCII “quotes”.", "recommend": 1,
         "directions": [
-            {"name": n, "source": "Test source", "idea": "One idea.", "chain": "a → b → c", "motion": "settle",
+            {"name": n, "family": fam, "source": "Test source", "idea": "One idea.", "chain": "a → b → c", "motion": "settle",
              "risk": "None.", "palette": ["#E2531F", "#2B2236", "#F7E6C4"],
-             "pattern": "good.svg", "pictogram": "good.svg", "object": "good.svg"}
-            for n in ("Alpha", "Beta", "Gamma")
+             "signature": "good.svg", "spot": "good.svg", "scene": "good.svg"}
+            for n, fam in (("Alpha", "Flat spot"), ("Beta", "Pattern-led"), ("Gamma", "Soft 3D"))
         ],
     }
     spec_path = os.path.join(tmp, "directions.json")
@@ -91,6 +91,14 @@ def main():
         json.dump(spec, f, ensure_ascii=False)
     sheet = os.path.join(tmp, "directions.html")
     run("direction sheet", py("direction_sheet.py", spec_path, "-o", sheet), ["3 directions", sheet])
+    legacy = {**spec, "directions": [
+        {**{k: v for k, v in d.items() if k not in ("signature", "spot", "scene")}, "family": "Pattern-led",
+         "pattern": "good.svg", "pictogram": "good.svg", "object": "good.svg"} for d in spec["directions"]]}
+    legacy_path = os.path.join(tmp, "legacy.json")
+    with open(legacy_path, "w", encoding="utf-8") as f:
+        json.dump(legacy, f, ensure_ascii=False)
+    run("direction sheet: legacy keys, same-family warning", py("direction_sheet.py", legacy_path, "-o", sheet),
+        ["3 directions", "all directions share the family"])
     bad_spec = os.path.join(tmp, "bad.json")
     with open(bad_spec, "w", encoding="utf-8") as f:
         json.dump({"directions": spec["directions"][:1]}, f)
@@ -110,7 +118,14 @@ def main():
         out_dir = os.path.join(tmp, "template")
         run("template: node build", [node, os.path.join(SKILL, "templates", "build-template.mjs"), out_dir],
             [os.path.join(out_dir, "03-story-covers.svg")])
-        run("template: output passes audit", py("system_audit.py", os.path.join(out_dir, "03-story-covers.svg")), ["[PASS]"])
+        run("template: output passes audit", py("system_audit.py", "--family", "pattern",
+                                                os.path.join(out_dir, "03-story-covers.svg")), ["[PASS]"])
+        flat_dir = os.path.join(tmp, "flat")
+        run("template: flat spot build", [node, os.path.join(SKILL, "templates", "flat-spot-template.mjs"), flat_dir],
+            [os.path.join(flat_dir, "spot-payment-sent.svg")])
+        run("template: flat spots pass audit", py("system_audit.py", "--family", "character", *[
+            os.path.join(flat_dir, f) for f in ("spot-payment-sent.svg", "spot-empty.svg", "spot-card-frozen.svg",
+                                                "scene-onboarding.svg")]), ["[PASS]"])
     else:
         print("[skip] template: node not installed")
 

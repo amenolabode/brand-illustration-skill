@@ -1,6 +1,6 @@
 # Cowrywise analytical example
 
-This example demonstrates a complete translation. Do not reuse it as a default aesthetic.
+This example demonstrates one complete translation in the **pattern-led** family. It is one of many reference systems (see `reference-systems.md`). Do not reuse it as a default aesthetic or composition.
 
 ## Strategic chain
 

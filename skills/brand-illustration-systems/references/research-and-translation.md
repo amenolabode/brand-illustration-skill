@@ -123,7 +123,7 @@ Use this when the user shares an existing illustration system (images, GIFs, a s
 2. **Separate the modes.** Most systems combine two or three rendering modes, such as a technical scene, flat pictograms and extruded objects. Describe each one separately: projection, fills, edges, pattern placement.
 3. **Measure, don't guess.** Sample the palette, and note the pattern's line weight relative to the silhouette, its contrast against the face, its density and where it sits.
 4. **Name the source and verify it.** Hypothesise the source world from the pattern's behaviour, then confirm it with the designer's or studio's own published rationale. State clearly what is confirmed and what is inferred.
-5. **List the execution qualities** a new system must keep when the source changes (SKILL.md, Phase 6). This list becomes the checklist for the side-by-side review.
+5. **List the execution qualities** a new system must keep when the source changes (SKILL.md, Phase 7). This list becomes the checklist for the side-by-side review.
 6. **Describe the layer-by-layer reconstruction** for each mode, so the analysis can be checked by rebuilding it.
 
 `cowrywise-example.md` is a complete analysis of this kind.

@@ -10,25 +10,37 @@
     {
       "id": 2,
       "prompt": "No direction in mind, just propose. Brand: Bedrock savings app, promise 'small regular contributions become a durable foundation'. Subjects: goal, vault, auto-save, community, statements, verification.",
-      "expected_output": "Three directions from different behaviour families (not colour variants), each with a pattern tile, the same pictogram subject and the same editorial object as SVG, palette, idea, meaning chain, motion verb and risk. They appear on ONE direction overview sheet rendered to PNG, with a recommendation. The skill then stops and offers the full proof family instead of building it.",
+      "expected_output": "Three directions in three DIFFERENT rendering families (e.g. flat spot, character-led, soft 3D or pattern-led), at most one pattern-led, each pairing an idea with a family. Each shows a signature element, the same product spot moment (ideally in a phone frame) and the same scene moment from a touchpoint map, plus palette, idea, meaning chain, motion verb and risk, on ONE overview sheet rendered to PNG with a recommendation. Not every asset is an object on a coloured square. The skill stops and offers the full system.",
       "files": []
     },
     {
       "id": 3,
       "prompt": "I want our illustrations based on Adire textile patterns. Brand: a Lagos savings cooperative app about collective, patient wealth.",
-      "expected_output": "The skill researches Adire's provenance and raises the stewardship questions (makers, meaning, permission). It then presents three different translations of Adire (e.g. pattern-led, structure-led, literal versus abstracted) rather than three different source worlds. Any alternative source is offered in one line only. The skill stops at the checkpoint.",
+      "expected_output": "The skill researches Adire's provenance and raises the stewardship questions (makers, meaning, permission). It presents three translations of Adire in different rendering families (e.g. pattern-led surface, flat spots built from the motif geometry, a device or character drawn from the resist-dyeing process), not three different source worlds. Any alternative source is offered in one line only. The skill stops at the checkpoint.",
       "files": []
     },
     {
       "id": 4,
       "prompt": "Direction B. Build it.",
-      "expected_output": "Proof family built as editable vector from shared tokens: a technical scene (wireframe → volume → material), six pictograms at display/standard/micro tiers, eight editorial objects, one real animation with a reduced-motion state, and a spec page. All assets pass system_audit.py with no FAIL, and renders were inspected.",
+      "expected_output": "The full system for the chosen direction, built by touchpoint tier: micro icons with a reduced state, 6-8 product spots covering functional, sensitive and celebratory moments (no character or joke on sensitive ones), 2-3 scenes, a hero, one real animation with a reduced-motion state, and a spec page with the touchpoint map and construction rules. 2D assets are editable vector, all pass system_audit.py --family <family> with no FAIL, and renders were inspected.",
       "files": []
     },
     {
       "id": 5,
       "prompt": "These are Cowrywise's illustrations. What inspired the patterns, and how would I rebuild them layer by layer?",
       "expected_output": "A reference analysis: separate rendering modes, measured palette and pattern weight, the source identified as guilloché security printing and confirmed by the studio's published rationale, layer-by-layer reconstruction, and the execution qualities to keep if the source changes.",
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "We're Tally, a bill-splitting app for flatmates. Make illustrations flat and friendly, a bit like Monzo's.",
+      "expected_output": "The skill notices the mismatch: Monzo's current illustration system (2022) is expressive line and character, not flat geometry. It says so in one line and confirms whether the user wants flat geometry or Monzo's energetic, hand-drawn warmth, or proceeds on a stated assumption. Once the family is fixed, the three directions are three different ideas and signatures in that family (same_family set on the sheet), using the reference's lessons, not its look. The touchpoint map covers split requests, settled-up success, an overdue reminder (sensitive) and empty states.",
+      "files": []
+    },
+    {
+      "id": 7,
+      "prompt": "Design an illustration system for Kite, a youth investing app. Go straight to directions, no questions.",
+      "expected_output": "States assumptions instead of an intake, including a touchpoint map with tiers and emotional temperature and two proof moments. Writes 'X but not Y' tone fences. Proposes three directions in different families, drawing ideas from at least two wells (the brand's own assets such as logo or type, a source world, a story or cast), and does not default to the Cowrywise/Bedrock pattern-on-object look. Stops at the checkpoint.",
       "files": []
     }
   ]

@@ -6,8 +6,8 @@ user wants speed, or gives a complete brief, skip the intake, write your assumpt
 ## 1. The preferred-direction question (always first)
 
 > **Do you already have a direction in mind?**
-> (a) **Yes.** A source world, pattern, material, craft, notation or reference you want to use, such as "Adire
-> textiles", "topographic maps" or "like Cowrywise but not guilloché". Tell me what it is and why it matters to you.
+> (a) **Yes.** A style, a brand whose illustrations you admire, a source, material or craft, such as "energetic
+> line like Monzo", "3D like Cash App", "Adire textiles" or "topographic maps". Tell me what it is and why.
 > (b) **Partly.** A feeling, a few references or things to avoid, but no source yet.
 > (c) **No.** Research and propose three directions for me.
 
@@ -16,16 +16,17 @@ allowed. Otherwise ask in plain text.
 
 Follow up on (a) only if it is ambiguous. A named culture or craft needs provenance and permission questions: who
 practises it, whether it is sacred or restricted, and whether the team has a relationship with its makers. A named
-reference system ("like X") is analysed, never copied. Record which execution qualities they admire (see
-`research-and-translation.md` §Reference analysis).
+reference system ("like X") is analysed, never copied: find it in `reference-systems.md`, record which qualities they
+admire, and note whether they are naming a **family** (flat, 3D, line) or an **idea**.
 
 ## 2–5. Brief questions (pick the ones still open)
 
 2. **Tenet and transformation.** What does the brand promise, and what changes for the customer? One sentence each is enough.
-3. **What must the illustrations explain?** Product concepts, features, emotional moments or education topics. List 6–10 subjects.
+3. **Where will illustrations live?** Empty states, onboarding, success screens, errors, marketing site, campaigns,
+   social, app-store art, print. Which moments matter most? (See `touchpoints.md`.)
 4. **Existing identity.** Logo, palette, typography and any illustration you must keep or replace. Ask for files.
-5. **Where it lives.** Product UI icons (smallest size), marketing, social, print, motion, and who will produce new
-   assets later (in-house designers, agencies, developers).
+5. **Production.** Smallest size needed (e.g. 20 px UI icons), motion ambitions, and who will make new assets later
+   with which tools (Figma, Illustrator, Blender, Rive, Lottie, a commissioned illustrator).
 
 Optional when relevant: competitors to stand apart from, accessibility requirements, timeline, decision-maker.
 
@@ -33,9 +34,10 @@ Optional when relevant: competitors to stand apart from, accessibility requireme
 
 ```markdown
 **Assumptions** (tell me if any are wrong):
-- Direction: none given, so I'll propose three source worlds.
+- Direction: none given, so I'll propose three directions in different rendering families.
+- Touchpoints: <inferred list, e.g. empty states, onboarding, success, marketing hero>
 - Tenet: <inferred sentence>
-- Subjects: <6–10 inferred concepts>
+- Proof moments: <one product spot, one scene or hero>
 - Constraints: <palette or logo to respect, or "none known">
 - Smallest use: <e.g. 20 px UI icon>
 ```

@@ -1,6 +1,16 @@
-# Production route and prompts
+# Production routes and prompts
 
-## Proof route: parametric vector (required)
+## Production route by family
+
+| Family | Production source of truth | Agent can build directly |
+|---|---|---|
+| Flat spot, technical, brand device, pattern-led | Editable SVG/Figma from shared tokens and construction rules | Yes: generated or hand-written SVG (`templates/flat-spot-template.mjs`, `templates/build-template.mjs`) |
+| Character-led | Character sheet (construction shapes, ratios, turnaround, expressions) + SVG assets | Yes, for simple primitive-built characters; recommend an illustrator for a signature cast |
+| Expressive line | Brush/line spec, figure conventions, reference board + assets | Direction samples only; recommend commissioning an illustrator |
+| Soft 3D | Scene kit: camera, lights, materials, bevels (Blender/Spline/C4D) + renders | SVG gradient approximations or labelled image-model exploration for samples; a 3D tool for production |
+| Collage | Cut-out and texture rules, licensed asset library | Samples with placeholders; rights must be cleared |
+
+## Proof route for 2D families: parametric vector
 
 Prove the system with editable vector assets generated from shared definitions. A starter generator is `templates/build-template.mjs`. The repository's `examples/bedrock/` folder holds a complete worked run.
 
@@ -70,13 +80,23 @@ After generation, inspect:
 - Small-size silhouette clarity.
 - No unwanted text, logos or watermark.
 - Family resemblance across all sets.
-- Pattern weight: lines are fine and low-contrast inside the silhouette. Thick colour bands are a failure.
-- Mode separation: scene, icons and editorial objects use different rendering.
+- Pattern weight (pattern-led family only): lines are fine and low-contrast inside the silhouette. Thick colour bands are a failure.
+- Family fit: the asset obeys its family's construction rules (`style-families.md`).
+- Context: spots are shown in a real touchpoint (phone frame, component), not only on a coloured square.
 - Colour hierarchy: one anchor hue carries signal, and the faces stay pale.
-- Flatness: no lighting, grain or drop shadows unless the source demands them.
+- Flatness (flat, pattern, technical, device): no lighting, grain or drop shadows unless the family or source demands them.
 
 If a generation drifts, revise one variable at a time and repeat the full shared system block.
 
 ## Known failure (Bedrock v1)
 
 The first proof run used image generation for every family. The meaning chain was right, but the output failed the reference. It had thick stripes painted over the shapes, one clay material across all three modes, five equal-weight colours, rendered lighting, a crack drawn differently on every object, no real scale tiers, and a sliced-storyboard GIF. Its validation passed because it checked the prompt rather than the pixels. The repository's `examples/bedrock/index.html` documents the corrections.
+
+## Known failure (Scan, pattern anchoring)
+
+Run on a new brand after the Bedrock fix, the skill offered three directions (print registration, lens rings, loom
+weave) that were all the same family: a patterned object on a coloured square with an offset edge. Only the pattern
+content differed. Causes: the sample spec demanded a pattern tile, the overview sheet had a fixed pattern slot, the audit
+warned when no `<pattern>` existed, and the only worked example was pattern-led. Fixes: directions are now idea plus
+family, the three must differ in family, samples use real touchpoint moments, and the audit checks against the chosen
+family.
