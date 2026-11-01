@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 500" width="1200" height="500" ><defs><pattern id="ic-bed-sand" patternUnits="userSpaceOnUse" width="96" height="36" patternTransform="scale(0.62)">
+    <rect width="96" height="36" fill="#F7E6C4"/>
+    <g fill="none" stroke="#E2BF83" stroke-width="1.5" stroke-linecap="round"><path d="M0 5.00L3 5.31L6 5.61L9 5.89L12 6.13L15 6.33L18 6.48L21 6.57L24 6.60L27 6.57L30 6.48L33 6.33L36 6.13L39 5.89L42 5.61L45 5.31L48 5.00L51 4.69L54 4.39L57 4.11L60 3.87L63 3.67L66 3.52L69 3.43L72 3.40L75 3.43L78 3.52L81 3.67L84 3.87L87 4.11L90 4.39L93 4.69L96 5.00"/><path d="M0 14.31L3 14.39L6 14.38L9 14.28L12 14.09L15 13.82L18 13.48L21 13.08L24 12.64L27 12.18L30 11.71L33 11.25L36 10.82L39 10.43L42 10.11L45 9.86L48 9.69L51 9.61L54 9.62L57 9.72L60 9.91L63 10.18L66 10.52L69 10.92L72 11.36L75 11.82L78 12.29L81 12.75L84 13.18L87 13.57L90 13.89L93 14.14L96 14.31"/><path d="M0 21.62L3 21.41L6 21.18L9 20.94L12 20.71L15 20.49L18 20.29L21 20.11L24 19.97L27 19.87L30 19.81L33 19.80L36 19.84L39 19.91L42 20.03L45 20.19L48 20.38L51 20.59L54 20.82L57 21.06L60 21.29L63 21.51L66 21.71L69 21.89L72 22.03L75 22.13L78 22.19L81 22.20L84 22.16L87 22.09L90 21.97L93 21.81L96 21.62"/><path d="M0 28.49L3 28.26L6 28.10L9 28.02L12 28.01L15 28.07L18 28.21L21 28.42L24 28.69L27 29.01L30 29.37L33 29.75L36 30.15L39 30.53L42 30.90L45 31.23L48 31.51L51 31.74L54 31.90L57 31.98L60 31.99L63 31.93L66 31.79L69 31.58L72 31.31L75 30.99L78 30.63L81 30.25L84 29.85L87 29.47L90 29.10L93 28.77L96 28.49"/></g>
+    <g fill="#E2BF83"><circle cx="2.0" cy="27.1" r="0.74"/><circle cx="21.4" cy="26.5" r="0.87"/><circle cx="32.3" cy="26.6" r="0.98"/><circle cx="51.9" cy="26.3" r="0.92"/><circle cx="77.1" cy="24.8" r="0.79"/><circle cx="67.1" cy="26.4" r="0.63"/><circle cx="64.9" cy="25.6" r="1.06"/><circle cx="76.3" cy="24.4" r="0.86"/><circle cx="86.9" cy="26.3" r="0.92"/><circle cx="55.1" cy="27.1" r="1.05"/><circle cx="36.2" cy="25.1" r="1.02"/></g>
+  </pattern><pattern id="ic-bed-clay" patternUnits="userSpaceOnUse" width="96" height="36" patternTransform="scale(0.62)">
+    <rect width="96" height="36" fill="#F7D6C7"/>
+    <g fill="none" stroke="#E9A88C" stroke-width="1.5" stroke-linecap="round"><path d="M0 5.00L3 5.31L6 5.61L9 5.89L12 6.13L15 6.33L18 6.48L21 6.57L24 6.60L27 6.57L30 6.48L33 6.33L36 6.13L39 5.89L42 5.61L45 5.31L48 5.00L51 4.69L54 4.39L57 4.11L60 3.87L63 3.67L66 3.52L69 3.43L72 3.40L75 3.43L78 3.52L81 3.67L84 3.87L87 4.11L90 4.39L93 4.69L96 5.00"/><path d="M0 14.31L3 14.39L6 14.38L9 14.28L12 14.09L15 13.82L18 13.48L21 13.08L24 12.64L27 12.18L30 11.71L33 11.25L36 10.82L39 10.43L42 10.11L45 9.86L48 9.69L51 9.61L54 9.62L57 9.72L60 9.91L63 10.18L66 10.52L69 10.92L72 11.36L75 11.82L78 12.29L81 12.75L84 13.18L87 13.57L90 13.89L93 14.14L96 14.31"/><path d="M0 21.62L3 21.41L6 21.18L9 20.94L12 20.71L15 20.49L18 20.29L21 20.11L24 19.97L27 19.87L30 19.81L33 19.80L36 19.84L39 19.91L42 20.03L45 20.19L48 20.38L51 20.59L54 20.82L57 21.06L60 21.29L63 21.51L66 21.71L69 21.89L72 22.03L75 22.13L78 22.19L81 22.20L84 22.16L87 22.09L90 21.97L93 21.81L96 21.62"/><path d="M0 28.49L3 28.26L6 28.10L9 28.02L12 28.01L15 28.07L18 28.21L21 28.42L24 28.69L27 29.01L30 29.37L33 29.75L36 30.15L39 30.53L42 30.90L45 31.23L48 31.51L51 31.74L54 31.90L57 31.98L60 31.99L63 31.93L66 31.79L69 31.58L72 31.31L75 30.99L78 30.63L81 30.25L84 29.85L87 29.47L90 29.10L93 28.77L96 28.49"/></g>
+    <g fill="#E9A88C"><circle cx="2.0" cy="27.1" r="0.74"/><circle cx="21.4" cy="26.5" r="0.87"/><circle cx="32.3" cy="26.6" r="0.98"/><circle cx="51.9" cy="26.3" r="0.92"/><circle cx="77.1" cy="24.8" r="0.79"/><circle cx="67.1" cy="26.4" r="0.63"/><circle cx="64.9" cy="25.6" r="1.06"/><circle cx="76.3" cy="24.4" r="0.86"/><circle cx="86.9" cy="26.3" r="0.92"/><circle cx="55.1" cy="27.1" r="1.05"/><circle cx="36.2" cy="25.1" r="1.02"/></g>
+  </pattern><pattern id="ic-bed-lichen" patternUnits="userSpaceOnUse" width="96" height="36" patternTransform="scale(0.62)">
+    <rect width="96" height="36" fill="#E0ECD6"/>
+    <g fill="none" stroke="#AFCB99" stroke-width="1.5" stroke-linecap="round"><path d="M0 5.00L3 5.31L6 5.61L9 5.89L12 6.13L15 6.33L18 6.48L21 6.57L24 6.60L27 6.57L30 6.48L33 6.33L36 6.13L39 5.89L42 5.61L45 5.31L48 5.00L51 4.69L54 4.39L57 4.11L60 3.87L63 3.67L66 3.52L69 3.43L72 3.40L75 3.43L78 3.52L81 3.67L84 3.87L87 4.11L90 4.39L93 4.69L96 5.00"/><path d="M0 14.31L3 14.39L6 14.38L9 14.28L12 14.09L15 13.82L18 13.48L21 13.08L24 12.64L27 12.18L30 11.71L33 11.25L36 10.82L39 10.43L42 10.11L45 9.86L48 9.69L51 9.61L54 9.62L57 9.72L60 9.91L63 10.18L66 10.52L69 10.92L72 11.36L75 11.82L78 12.29L81 12.75L84 13.18L87 13.57L90 13.89L93 14.14L96 14.31"/><path d="M0 21.62L3 21.41L6 21.18L9 20.94L12 20.71L15 20.49L18 20.29L21 20.11L24 19.97L27 19.87L30 19.81L33 19.80L36 19.84L39 19.91L42 20.03L45 20.19L48 20.38L51 20.59L54 20.82L57 21.06L60 21.29L63 21.51L66 21.71L69 21.89L72 22.03L75 22.13L78 22.19L81 22.20L84 22.16L87 22.09L90 21.97L93 21.81L96 21.62"/><path d="M0 28.49L3 28.26L6 28.10L9 28.02L12 28.01L15 28.07L18 28.21L21 28.42L24 28.69L27 29.01L30 29.37L33 29.75L36 30.15L39 30.53L42 30.90L45 31.23L48 31.51L51 31.74L54 31.90L57 31.98L60 31.99L63 31.93L66 31.79L69 31.58L72 31.31L75 30.99L78 30.63L81 30.25L84 29.85L87 29.47L90 29.10L93 28.77L96 28.49"/></g>
+    <g fill="#AFCB99"><circle cx="2.0" cy="27.1" r="0.74"/><circle cx="21.4" cy="26.5" r="0.87"/><circle cx="32.3" cy="26.6" r="0.98"/><circle cx="51.9" cy="26.3" r="0.92"/><circle cx="77.1" cy="24.8" r="0.79"/><circle cx="67.1" cy="26.4" r="0.63"/><circle cx="64.9" cy="25.6" r="1.06"/><circle cx="76.3" cy="24.4" r="0.86"/><circle cx="86.9" cy="26.3" r="0.92"/><circle cx="55.1" cy="27.1" r="1.05"/><circle cx="36.2" cy="25.1" r="1.02"/></g>
+  </pattern><pattern id="ic-bed-slate" patternUnits="userSpaceOnUse" width="96" height="36" patternTransform="scale(0.62)">
+    <rect width="96" height="36" fill="#DDE4EF"/>
+    <g fill="none" stroke="#A6B8D4" stroke-width="1.5" stroke-linecap="round"><path d="M0 5.00L3 5.31L6 5.61L9 5.89L12 6.13L15 6.33L18 6.48L21 6.57L24 6.60L27 6.57L30 6.48L33 6.33L36 6.13L39 5.89L42 5.61L45 5.31L48 5.00L51 4.69L54 4.39L57 4.11L60 3.87L63 3.67L66 3.52L69 3.43L72 3.40L75 3.43L78 3.52L81 3.67L84 3.87L87 4.11L90 4.39L93 4.69L96 5.00"/><path d="M0 14.31L3 14.39L6 14.38L9 14.28L12 14.09L15 13.82L18 13.48L21 13.08L24 12.64L27 12.18L30 11.71L33 11.25L36 10.82L39 10.43L42 10.11L45 9.86L48 9.69L51 9.61L54 9.62L57 9.72L60 9.91L63 10.18L66 10.52L69 10.92L72 11.36L75 11.82L78 12.29L81 12.75L84 13.18L87 13.57L90 13.89L93 14.14L96 14.31"/><path d="M0 21.62L3 21.41L6 21.18L9 20.94L12 20.71L15 20.49L18 20.29L21 20.11L24 19.97L27 19.87L30 19.81L33 19.80L36 19.84L39 19.91L42 20.03L45 20.19L48 20.38L51 20.59L54 20.82L57 21.06L60 21.29L63 21.51L66 21.71L69 21.89L72 22.03L75 22.13L78 22.19L81 22.20L84 22.16L87 22.09L90 21.97L93 21.81L96 21.62"/><path d="M0 28.49L3 28.26L6 28.10L9 28.02L12 28.01L15 28.07L18 28.21L21 28.42L24 28.69L27 29.01L30 29.37L33 29.75L36 30.15L39 30.53L42 30.90L45 31.23L48 31.51L51 31.74L54 31.90L57 31.98L60 31.99L63 31.93L66 31.79L69 31.58L72 31.31L75 30.99L78 30.63L81 30.25L84 29.85L87 29.47L90 29.10L93 28.77L96 28.49"/></g>
+    <g fill="#A6B8D4"><circle cx="2.0" cy="27.1" r="0.74"/><circle cx="21.4" cy="26.5" r="0.87"/><circle cx="32.3" cy="26.6" r="0.98"/><circle cx="51.9" cy="26.3" r="0.92"/><circle cx="77.1" cy="24.8" r="0.79"/><circle cx="67.1" cy="26.4" r="0.63"/><circle cx="64.9" cy="25.6" r="1.06"/><circle cx="76.3" cy="24.4" r="0.86"/><circle cx="86.9" cy="26.3" r="0.92"/><circle cx="55.1" cy="27.1" r="1.05"/><circle cx="36.2" cy="25.1" r="1.02"/></g>
+  </pattern><pattern id="ic-bed-bone" patternUnits="userSpaceOnUse" width="96" height="36" patternTransform="scale(0.62)">
+    <rect width="96" height="36" fill="#FFFBF2"/>
+    <g fill="none" stroke="#E6D7BA" stroke-width="1.5" stroke-linecap="round"><path d="M0 5.00L3 5.31L6 5.61L9 5.89L12 6.13L15 6.33L18 6.48L21 6.57L24 6.60L27 6.57L30 6.48L33 6.33L36 6.13L39 5.89L42 5.61L45 5.31L48 5.00L51 4.69L54 4.39L57 4.11L60 3.87L63 3.67L66 3.52L69 3.43L72 3.40L75 3.43L78 3.52L81 3.67L84 3.87L87 4.11L90 4.39L93 4.69L96 5.00"/><path d="M0 14.31L3 14.39L6 14.38L9 14.28L12 14.09L15 13.82L18 13.48L21 13.08L24 12.64L27 12.18L30 11.71L33 11.25L36 10.82L39 10.43L42 10.11L45 9.86L48 9.69L51 9.61L54 9.62L57 9.72L60 9.91L63 10.18L66 10.52L69 10.92L72 11.36L75 11.82L78 12.29L81 12.75L84 13.18L87 13.57L90 13.89L93 14.14L96 14.31"/><path d="M0 21.62L3 21.41L6 21.18L9 20.94L12 20.71L15 20.49L18 20.29L21 20.11L24 19.97L27 19.87L30 19.81L33 19.80L36 19.84L39 19.91L42 20.03L45 20.19L48 20.38L51 20.59L54 20.82L57 21.06L60 21.29L63 21.51L66 21.71L69 21.89L72 22.03L75 22.13L78 22.19L81 22.20L84 22.16L87 22.09L90 21.97L93 21.81L96 21.62"/><path d="M0 28.49L3 28.26L6 28.10L9 28.02L12 28.01L15 28.07L18 28.21L21 28.42L24 28.69L27 29.01L30 29.37L33 29.75L36 30.15L39 30.53L42 30.90L45 31.23L48 31.51L51 31.74L54 31.90L57 31.98L60 31.99L63 31.93L66 31.79L69 31.58L72 31.31L75 30.99L78 30.63L81 30.25L84 29.85L87 29.47L90 29.10L93 28.77L96 28.49"/></g>
+    <g fill="#E6D7BA"><circle cx="2.0" cy="27.1" r="0.74"/><circle cx="21.4" cy="26.5" r="0.87"/><circle cx="32.3" cy="26.6" r="0.98"/><circle cx="51.9" cy="26.3" r="0.92"/><circle cx="77.1" cy="24.8" r="0.79"/><circle cx="67.1" cy="26.4" r="0.63"/><circle cx="64.9" cy="25.6" r="1.06"/><circle cx="76.3" cy="24.4" r="0.86"/><circle cx="86.9" cy="26.3" r="0.92"/><circle cx="55.1" cy="27.1" r="1.05"/><circle cx="36.2" cy="25.1" r="1.02"/></g>
+  </pattern></defs><style>
+  .ring{transform-box:fill-box;transform-origin:center;animation:deposit 4.8s cubic-bezier(.2,.8,.2,1) infinite}
+  .r1{animation-delay:0s}.r2{animation-delay:.18s}.r3{animation-delay:.36s}.r4{animation-delay:.54s}
+  @keyframes deposit{0%,62%{transform:scale(1);opacity:1}68%{transform:scale(.2);opacity:0}84%,100%{transform:scale(1);opacity:1}}
+  .d{animation:day 4.8s steps(1) infinite}.d2,.d3{opacity:0}.d1{animation-delay:0s}.d2{animation-delay:1.6s}.d3{animation-delay:3.2s}
+  @keyframes day{0%{opacity:1}33.33%,100%{opacity:0}}
+  .spin{transform-box:view-box;transform-origin:74px 74px;animation:spin 1.6s cubic-bezier(.6,0,.3,1) infinite}
+  @keyframes spin{0%,60%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion:reduce){.ring,.spin{animation:none}.d{animation:none}.d1{opacity:1}}
+</style>
+  <rect width="1200" height="500" fill="#FBF6EC"/>
+  <path d="M40 272H1160M40 392H1160" stroke="#E6D7BA" stroke-width="1"/>
+  <g transform="translate(40 84) scale(1.25)"><rect x="8" y="20" width="70" height="68" rx="7" fill="url(#ic-bed-slate)"/>
+    <rect x="18" y="10" width="70" height="68" rx="7" fill="#E2531F"/>
+    <rect x="13" y="24" width="9" height="12" rx="2.5" fill="#2B2236"/><rect x="13" y="52" width="9" height="12" rx="2.5" fill="#2B2236"/>
+    <circle cx="54" cy="44" r="17" fill="#FFFBF2" stroke="#2B2236" stroke-width="4"/>
+    <g stroke="#2B2236" stroke-width="3" stroke-linecap="round"><path d="M54 30V58M40 44H68"/></g><circle cx="54" cy="44" r="5.5" fill="#E2531F"/></g><g transform="translate(240 84) scale(1.25)"><polygon points="42.0,16.0 74.9,35.0 74.9,73.0 42.0,92.0 9.1,73.0 9.1,35.0" fill="url(#ic-bed-sand)"/>
+    <polygon points="52.0,6.0 84.9,25.0 84.9,63.0 52.0,82.0 19.1,63.0 19.1,25.0" fill="#E2531F"/>
+    <polygon points="52.0,21.0 71.9,32.5 71.9,55.5 52.0,67.0 32.1,55.5 32.1,32.5" fill="#FFFBF2"/>
+    <path d="M41 45L49 53L63 37" fill="none" stroke="#2B2236" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/></g><g transform="translate(440 84) scale(1.25)"><circle cx="54" cy="54" r="36" fill="url(#ic-bed-clay)"/>
+    <g class="rings">
+      <circle class="ring r1" cx="44" cy="46" r="35" fill="#E2531F"/>
+      <circle class="ring r2" cx="44" cy="46" r="24" fill="#FFFBF2"/>
+      <circle class="ring r3" cx="44" cy="46" r="15" fill="#E2531F"/>
+      <circle class="ring r4" cx="44" cy="46" r="6" fill="#2B2236"/>
+    </g>
+    <g class="arrow"><path d="M44 46L80 10" stroke="#2B2236" stroke-width="4" stroke-linecap="round"/><path d="M72 8L86 4L82 18Z" fill="#2B2236"/></g></g><g transform="translate(640 84) scale(1.25)"><rect x="6" y="28" width="62" height="58" rx="8" fill="url(#ic-bed-lichen)"/>
+    <g fill="#2B2236"><circle cx="24" cy="44" r="8.5"/><path d="M8 84C8 70 15 63 24 63C33 63 40 70 40 84Z"/><circle cx="72" cy="44" r="8.5"/><path d="M56 84C56 70 63 63 72 63C81 63 88 70 88 84Z"/></g>
+    <circle cx="48" cy="36" r="13" fill="#E2531F" stroke="#FBF6EC" stroke-width="3"/>
+    <path d="M24 88C24 70 35 60 48 60C61 60 72 70 72 88Z" fill="#E2531F" stroke="#FBF6EC" stroke-width="3"/></g><g transform="translate(840 84) scale(1.25)"><g transform="rotate(-14 48 50)"><rect x="22" y="14" width="50" height="66" rx="7" fill="url(#ic-bed-sand)"/></g>
+    <g transform="rotate(10 48 50)"><rect x="24" y="14" width="50" height="66" rx="7" fill="url(#ic-bed-clay)"/></g>
+    <rect x="24" y="18" width="48" height="64" rx="7" fill="#E2531F"/>
+    <circle cx="48" cy="40" r="8" fill="none" stroke="#FFFBF2" stroke-width="3.5"/>
+    <g fill="#FFFBF2"><rect x="34" y="58" width="28" height="4" rx="2"/><rect x="34" y="67" width="20" height="4" rx="2"/></g></g><g transform="translate(1040 84) scale(1.25)"><rect x="6" y="22" width="66" height="64" rx="7" fill="url(#ic-bed-lichen)"/>
+    <rect x="14" y="16" width="66" height="64" rx="7" fill="#F7E6C4"/>
+    <path d="M14 23A7 7 0 0 1 21 16H73A7 7 0 0 1 80 23V34H14Z" fill="#E2531F"/>
+    <g fill="#2B2236"><rect x="28" y="8" width="6" height="16" rx="3"/><rect x="60" y="8" width="6" height="16" rx="3"/></g>
+    <g class="days" fill="#2B2236" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="27" text-anchor="middle"><text class="d d1" x="42" y="67">8</text><text class="d d2" x="42" y="67">9</text><text class="d d3" x="42" y="67">10</text></g>
+    <circle cx="74" cy="74" r="16" fill="#E2531F" stroke="#FBF6EC" stroke-width="3"/>
+    <g class="spin"><path d="M65 76A9 9 0 1 0 68 67" fill="none" stroke="#FFFBF2" stroke-width="3.5" stroke-linecap="round"/><path d="M63 62L71 64L66 71Z" fill="#FFFBF2"/></g></g><g transform="translate(76 318) scale(0.5)"><rect x="8" y="20" width="70" height="68" rx="7" fill="#DDE4EF"/>
+    <rect x="18" y="10" width="70" height="68" rx="7" fill="#E2531F"/>
+    <rect x="13" y="24" width="9" height="12" rx="2.5" fill="#2B2236"/><rect x="13" y="52" width="9" height="12" rx="2.5" fill="#2B2236"/>
+    <circle cx="54" cy="44" r="17" fill="#FFFBF2" stroke="#2B2236" stroke-width="4"/>
+    <g stroke="#2B2236" stroke-width="3" stroke-linecap="round"><path d="M54 30V58M40 44H68"/></g><circle cx="54" cy="44" r="5.5" fill="#E2531F"/></g><g transform="translate(276 318) scale(0.5)"><polygon points="42.0,16.0 74.9,35.0 74.9,73.0 42.0,92.0 9.1,73.0 9.1,35.0" fill="#F7E6C4"/>
+    <polygon points="52.0,6.0 84.9,25.0 84.9,63.0 52.0,82.0 19.1,63.0 19.1,25.0" fill="#E2531F"/>
+    <polygon points="52.0,21.0 71.9,32.5 71.9,55.5 52.0,67.0 32.1,55.5 32.1,32.5" fill="#FFFBF2"/>
+    <path d="M41 45L49 53L63 37" fill="none" stroke="#2B2236" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/></g><g transform="translate(476 318) scale(0.5)"><circle cx="54" cy="54" r="36" fill="#F7D6C7"/>
+    <g class="rings">
+      <circle class="ring r1" cx="44" cy="46" r="35" fill="#E2531F"/>
+      <circle class="ring r2" cx="44" cy="46" r="24" fill="#FFFBF2"/>
+      <circle class="ring r3" cx="44" cy="46" r="15" fill="#E2531F"/>
+      <circle class="ring r4" cx="44" cy="46" r="6" fill="#2B2236"/>
+    </g>
+    <g class="arrow"><path d="M44 46L80 10" stroke="#2B2236" stroke-width="4" stroke-linecap="round"/><path d="M72 8L86 4L82 18Z" fill="#2B2236"/></g></g><g transform="translate(676 318) scale(0.5)"><rect x="6" y="28" width="62" height="58" rx="8" fill="#E0ECD6"/>
+    <g fill="#2B2236"><circle cx="24" cy="44" r="8.5"/><path d="M8 84C8 70 15 63 24 63C33 63 40 70 40 84Z"/><circle cx="72" cy="44" r="8.5"/><path d="M56 84C56 70 63 63 72 63C81 63 88 70 88 84Z"/></g>
+    <circle cx="48" cy="36" r="13" fill="#E2531F" stroke="#FBF6EC" stroke-width="3"/>
+    <path d="M24 88C24 70 35 60 48 60C61 60 72 70 72 88Z" fill="#E2531F" stroke="#FBF6EC" stroke-width="3"/></g><g transform="translate(876 318) scale(0.5)"><g transform="rotate(-14 48 50)"><rect x="22" y="14" width="50" height="66" rx="7" fill="#F7E6C4"/></g>
+    <g transform="rotate(10 48 50)"><rect x="24" y="14" width="50" height="66" rx="7" fill="#F7D6C7"/></g>
+    <rect x="24" y="18" width="48" height="64" rx="7" fill="#E2531F"/>
+    <circle cx="48" cy="40" r="8" fill="none" stroke="#FFFBF2" stroke-width="3.5"/>
+    <g fill="#FFFBF2"><rect x="34" y="58" width="28" height="4" rx="2"/><rect x="34" y="67" width="20" height="4" rx="2"/></g></g><g transform="translate(1076 318) scale(0.5)"><rect x="6" y="22" width="66" height="64" rx="7" fill="#E0ECD6"/>
+    <rect x="14" y="16" width="66" height="64" rx="7" fill="#F7E6C4"/>
+    <path d="M14 23A7 7 0 0 1 21 16H73A7 7 0 0 1 80 23V34H14Z" fill="#E2531F"/>
+    <g fill="#2B2236"><rect x="28" y="8" width="6" height="16" rx="3"/><rect x="60" y="8" width="6" height="16" rx="3"/></g>
+    <g class="days" fill="#2B2236" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="27" text-anchor="middle"><text class="d d1" x="42" y="67">8</text><text class="d d2" x="42" y="67">9</text><text class="d d3" x="42" y="67">10</text></g>
+    <circle cx="74" cy="74" r="16" fill="#E2531F" stroke="#FBF6EC" stroke-width="3"/>
+    <g class="spin"><path d="M65 76A9 9 0 1 0 68 67" fill="none" stroke="#FFFBF2" stroke-width="3.5" stroke-linecap="round"/><path d="M63 62L71 64L66 71Z" fill="#FFFBF2"/></g></g><g transform="translate(88 436) scale(0.25)">
+    <rect x="18" y="10" width="70" height="68" rx="7" fill="#E2531F"/>
+    
+    <circle cx="54" cy="44" r="17" fill="#FFFBF2" stroke="#2B2236" stroke-width="6"/>
+    </g><g transform="translate(288 436) scale(0.25)">
+    <polygon points="52.0,6.0 84.9,25.0 84.9,63.0 52.0,82.0 19.1,63.0 19.1,25.0" fill="#E2531F"/>
+    
+    <path d="M41 45L49 53L63 37" fill="none" stroke="#FFFBF2" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g><g transform="translate(488 436) scale(0.25)">
+    <g class="rings">
+      <circle class="ring r1" cx="44" cy="46" r="35" fill="#E2531F"/>
+      <circle class="ring r2" cx="44" cy="46" r="24" fill="#FFFBF2"/>
+      <circle class="ring r3" cx="44" cy="46" r="15" fill="#E2531F"/>
+      
+    </g>
+    </g><g transform="translate(688 436) scale(0.25)">
+    <g fill="#2B2236"><circle cx="20" cy="46" r="10"/><circle cx="76" cy="46" r="10"/></g>
+    <circle cx="48" cy="36" r="13" fill="#E2531F" stroke="#FBF6EC" stroke-width="3"/>
+    <path d="M24 88C24 70 35 60 48 60C61 60 72 70 72 88Z" fill="#E2531F" stroke="#FBF6EC" stroke-width="3"/></g><g transform="translate(888 436) scale(0.25)">
+    <rect x="24" y="18" width="48" height="64" rx="7" fill="#E2531F"/>
+    <circle cx="48" cy="40" r="10" fill="none" stroke="#FFFBF2" stroke-width="5"/>
+    </g><g transform="translate(1088 436) scale(0.25)">
+    <rect x="14" y="16" width="66" height="64" rx="7" fill="#F7E6C4"/>
+    <path d="M14 23A7 7 0 0 1 21 16H73A7 7 0 0 1 80 23V34H14Z" fill="#E2531F"/>
+    <g fill="#2B2236"><rect x="28" y="8" width="6" height="16" rx="3"/><rect x="60" y="8" width="6" height="16" rx="3"/></g>
+    
+    <circle cx="74" cy="74" r="18" fill="#E2531F" stroke="#FBF6EC" stroke-width="3"/>
+    <g class="spin"><path d="M65 76A9 9 0 1 0 68 67" fill="none" stroke="#FFFBF2" stroke-width="4.5" stroke-linecap="round"/><path d="M63 62L71 64L66 71Z" fill="#FFFBF2"/></g></g><g transform="translate(100 0)"><text y="242" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="600" fill="#2B2236" text-anchor="middle">Reserve</text></g><g transform="translate(300 0)"><text y="242" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="600" fill="#2B2236" text-anchor="middle">Verified</text></g><g transform="translate(500 0)"><text y="242" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="600" fill="#2B2236" text-anchor="middle">Goal</text></g><g transform="translate(700 0)"><text y="242" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="600" fill="#2B2236" text-anchor="middle">Circles</text></g><g transform="translate(900 0)"><text y="242" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="600" fill="#2B2236" text-anchor="middle">Statements</text></g><g transform="translate(1100 0)"><text y="242" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="600" fill="#2B2236" text-anchor="middle">Auto-save</text></g><text x="40" y="52" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11" letter-spacing=".08em" fill="#4A3D5A" opacity=".7">DISPLAY · BEDDING ON PLATE</text><text x="40" y="300" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11" letter-spacing=".08em" fill="#4A3D5A" opacity=".7">STANDARD · PLAIN PLATE</text><text x="40" y="418" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="11" letter-spacing=".08em" fill="#4A3D5A" opacity=".7">MICRO · SILHOUETTE ONLY</text></svg>

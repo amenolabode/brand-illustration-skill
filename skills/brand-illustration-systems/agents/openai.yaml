@@ -1,0 +1,4 @@
+interface:
+  display_name: "Brand Illustration Systems"
+  short_description: "Build scalable illustration systems from brand ideas"
+  default_prompt: "Develop a distinctive illustration system from this brand idea, document its visual grammar, and prove it across a coherent asset family."

@@ -1,0 +1,35 @@
+{
+  "skill_name": "brand-illustration-systems",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "We're Bedrock, a savings app. Our promise: small, regular contributions become a durable foundation. We need an illustration system for the app and marketing.",
+      "expected_output": "One intake message (at most five questions) whose first question asks whether the user already has a preferred direction, with options (a) yes, (b) partly, (c) no. No assets are built before the answer, unless the user says to proceed on assumptions.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "No direction in mind, just propose. Brand: Bedrock savings app, promise 'small regular contributions become a durable foundation'. Subjects: goal, vault, auto-save, community, statements, verification.",
+      "expected_output": "Three directions from different behaviour families (not colour variants), each with a pattern tile, the same pictogram subject and the same editorial object as SVG, palette, idea, meaning chain, motion verb and risk. They appear on ONE direction overview sheet rendered to PNG, with a recommendation. The skill then stops and offers the full proof family instead of building it.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "I want our illustrations based on Adire textile patterns. Brand: a Lagos savings cooperative app about collective, patient wealth.",
+      "expected_output": "The skill researches Adire's provenance and raises the stewardship questions (makers, meaning, permission). It then presents three different translations of Adire (e.g. pattern-led, structure-led, literal versus abstracted) rather than three different source worlds. Any alternative source is offered in one line only. The skill stops at the checkpoint.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Direction B. Build it.",
+      "expected_output": "Proof family built as editable vector from shared tokens: a technical scene (wireframe → volume → material), six pictograms at display/standard/micro tiers, eight editorial objects, one real animation with a reduced-motion state, and a spec page. All assets pass system_audit.py with no FAIL, and renders were inspected.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "These are Cowrywise's illustrations. What inspired the patterns, and how would I rebuild them layer by layer?",
+      "expected_output": "A reference analysis: separate rendering modes, measured palette and pattern weight, the source identified as guilloché security printing and confirmed by the studio's published rationale, layer-by-layer reconstruction, and the execution qualities to keep if the source changes.",
+      "files": []
+    }
+  ]
+}

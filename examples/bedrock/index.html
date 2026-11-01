@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bedrock Illustration System</title>
+<style>
+  :root{
+    --paper:#FBF6EC; --ink:#2B2236; --ink-2:#4A3D5A; --muted:#7A6E84; --rule:#E6D7BA;
+    --ferric:#E2531F; --sand:#F7E6C4; --clay:#F7D6C7; --lichen:#E0ECD6; --slate:#DDE4EF; --bone:#FFFBF2;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 Inter,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  main{max-width:1180px;margin:0 auto;padding:56px 24px 96px}
+  h1{font-size:clamp(34px,5vw,56px);line-height:1.02;letter-spacing:-.03em;margin:0 0 16px;font-weight:800}
+  h2{font-size:26px;letter-spacing:-.02em;margin:0 0 6px;font-weight:750}
+  h3{font-size:15px;margin:0 0 4px;font-weight:700}
+  p{margin:0 0 12px;max-width:68ch}
+  .eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ferric);font-weight:700;margin-bottom:14px}
+  .lede{font-size:19px;color:var(--ink-2);max-width:60ch}
+  section{margin-top:80px}
+  .sub{color:var(--muted);margin-bottom:24px}
+  img{display:block;width:100%;height:auto;border-radius:14px}
+  .frame{border:1px solid var(--rule);border-radius:16px;overflow:hidden;background:#fff}
+  .frame img{border-radius:0}
+
+  .chain{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--rule);border-radius:16px;overflow:hidden;margin-top:28px}
+  .chain div{padding:18px;border-right:1px solid var(--rule);background:var(--bone)}
+  .chain div:last-child{border-right:0;background:var(--ferric);color:#fff}
+  .chain small{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.7;margin-bottom:6px;font-weight:700}
+
+  .fail{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .fail article{border:1px solid var(--rule);border-radius:16px;padding:20px;background:var(--bone)}
+  .fail .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:99px;margin-bottom:10px}
+  .tag.v1{background:#F3E1E1;color:#9B2C2C}
+  .fail p{font-size:15px;color:var(--ink-2);margin:0}
+  .fail b{color:var(--ink)}
+
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+  .compare figure{margin:0}
+  figcaption{font-size:13px;color:var(--muted);margin-top:8px}
+
+  .tokens{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  .sw{border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:#fff}
+  .sw i{display:block;height:64px}
+  .sw div{padding:10px 12px;font-size:13px}
+  .sw code{font:12px ui-monospace,Menlo,monospace;color:var(--muted)}
+
+  .rules{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .rules article{border-top:3px solid var(--ink);padding-top:14px}
+  .rules article:nth-child(3n+1){border-color:var(--ferric)}
+  .rules p{font-size:15px;color:var(--ink-2)}
+
+  .duo{display:grid;grid-template-columns:3fr 2fr;gap:16px;align-items:start}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  td,th{text-align:left;padding:10px 8px;border-bottom:1px solid var(--rule);vertical-align:top}
+  th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+  @media (max-width:820px){
+    .chain{grid-template-columns:1fr}.chain div{border-right:0;border-bottom:1px solid var(--rule)}
+    .fail,.compare,.rules,.duo{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">Brand illustration system · proof v2</div>
+  <h1>Bedrock: wealth is deposited layer by layer.</h1>
+  <p class="lede">The v1 proof rendered a geology mood board. This version is a construction system: one pattern tile, one depth rule, one anchor hue and three modes. Every asset is generated from them as vector (<code>build.mjs</code>), so any designer can add an asset nobody has drawn yet.</p>
+
+  <div class="chain">
+    <div><small>Tenet</small>Small, regular contributions become a durable foundation.</div>
+    <div><small>Source world</small>Sedimentary stratigraphy (USGS)</div>
+    <div><small>Source behaviour</small>Deposit → compact → fault → keep the record</div>
+    <div><small>Visual grammar</small>Bedding lines, layered sidewalls, a single fault, the newest layer in ferric</div>
+    <div><small>Communicative use</small>Progress adds layers. Setbacks shift layers but never erase them.</div>
+  </div>
+
+  <section>
+    <h2>Where v1 went wrong</h2>
+    <p class="sub">The meaning chain in v1 was sound. The execution undid it: the reference's main quality is controlled, scalable precision, and v1 lost it.</p>
+    <div class="fail">
+      <article><span class="tag v1">v1 failure</span><h3>Texture instead of pattern</h3><p>v1 painted <b>thick horizontal colour bands</b> with stone grain over every shape. Guilloché is fine, low-contrast linework <i>inside</i> a clean silhouette, so the shape reads first and the pattern second. v1 reversed that order. <b>Fix:</b> a 96×36 bedding tile, line colour one step darker than the face, 1.1 units wide.</p></article>
+      <article><span class="tag v1">v1 failure</span><h3>Three modes collapsed into one</h3><p>The reference uses three different modes: <b>isometric linework</b> (scene), <b>flat pictograms</b> (icons) and <b>extruded objects</b> (covers). v1 rendered all three as the same chunky clay. <b>Fix:</b> true isometric scene, flat icons, oblique-extruded covers. They share tokens, not rendering.</p></article>
+      <article><span class="tag v1">v1 failure</span><h3>No anchor hue</h3><p>Cowrywise hangs everything on <b>one electric blue + one ink + pastels</b>. v1 spread five earth tones at equal weight, so nothing signals. <b>Fix:</b> Ferric (iron oxide, the pigment that actually bands red rock) is the only saturated colour. It marks the subject, the field and the newest deposit.</p></article>
+      <article><span class="tag v1">v1 failure</span><h3>Raster, lit, not reproducible</h3><p>v1's images came from an image model, with drop shadows, rendered lighting, a crack in a different place on every object, and no files a team could edit. That gives you a style sample, not a system. <b>Fix:</b> every asset is generated SVG from shared functions. Flat colour, no lighting, and the fault sits at the same angle and throw on every object.</p></article>
+      <article><span class="tag v1">v1 failure</span><h3>No reduced states</h3><p>v1 documented "vector reduction at 16–24 px" as future work, but the skill names scalability as a requirement. <b>Fix:</b> three icon tiers are generated from one definition: bedding on the plate, then a plain plate, then the silhouette alone.</p></article>
+      <article><span class="tag v1">v1 failure</span><h3>Fake motion</h3><p>v1's GIF was a storyboard image sliced into six crops, so the frames don't register and the block drifts between them. <b>Fix:</b> real CSS animation in the SVGs: layers deposit, settle and fault; target rings deposit; the date ticks. All three honour reduced motion.</p></article>
+    </div>
+    <div class="compare">
+      <figure><img src="v1-story-covers.png" alt="v1 story covers: textured stone objects with thick stripes"><figcaption>v1: the stripes dominate the silhouette, and the lighting and crack placement change from object to object.</figcaption></figure>
+      <figure><img src="03-story-covers.svg" alt="v2 story covers: flat pastel objects with fine bedding lines and layered sidewalls on a ferric field"><figcaption>v2: the silhouette comes first, then fine bedding with one consistent fault, then a layered sidewall.</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>Tokens</h2>
+    <p class="sub">The palette has the same role structure as the reference (signal, depth, quiet faces), but every hue is chosen from the source world.</p>
+    <div class="tokens">
+      <div class="sw"><i style="background:var(--ferric)"></i><div><b>Ferric</b><br><code>#E2531F</code><br>signal · field · newest layer</div></div>
+      <div class="sw"><i style="background:var(--ink)"></i><div><b>Basalt</b><br><code>#2B2236</code><br>depth · structure</div></div>
+      <div class="sw"><i style="background:var(--ink-2)"></i><div><b>Basalt soft</b><br><code>#4A3D5A</code><br>sidewall bands</div></div>
+      <div class="sw"><i style="background:var(--sand)"></i><div><b>Sand</b><br><code>#F7E6C4</code> / line <code>#E2BF83</code></div></div>
+      <div class="sw"><i style="background:var(--clay)"></i><div><b>Clay</b><br><code>#F7D6C7</code> / line <code>#E9A88C</code></div></div>
+      <div class="sw"><i style="background:var(--lichen)"></i><div><b>Lichen</b><br><code>#E0ECD6</code> / line <code>#AFCB99</code></div></div>
+      <div class="sw"><i style="background:var(--slate)"></i><div><b>Slate</b><br><code>#DDE4EF</code> / line <code>#A6B8D4</code></div></div>
+      <div class="sw"><i style="background:var(--bone);border-bottom:1px solid var(--rule)"></i><div><b>Bone</b><br><code>#FFFBF2</code> / line <code>#E6D7BA</code></div></div>
+    </div>
+    <div class="duo" style="margin-top:24px">
+      <div class="frame"><img src="00-pattern-bedding.svg" alt="Bedding pattern tile enlarged, one tile outlined"></div>
+      <table>
+        <tr><th>Bedding tile</th><th></th></tr>
+        <tr><td>Grid</td><td>96 × 36, seamless both axes (dashed = one tile)</td></tr>
+        <tr><td>Bedding planes</td><td>4 sine lines, 1 period per tile; amplitudes 1.6 / 2.4 / 1.2 / 2.0; distinct phases so beds never look like corrugation</td></tr>
+        <tr><td>Grains</td><td>11 dots, r 0.6–1.1, only in the third bed (sandstone)</td></tr>
+        <tr><td>Contrast</td><td>Line = face + one tone step. Never ink on pastel.</td></tr>
+        <tr><td>Lamina</td><td>Straight hatching every 4–5 units for quiet surfaces (core plates)</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Invariants</h2>
+    <p class="sub">These five rules never change. If an asset obeys all five, it belongs to the family, even in one colour.</p>
+    <div class="rules">
+      <article><h3>1 · Silhouette first</h3><p>Every subject must be recognisable as a solid shape in one colour. Bedding is only ever clipped inside a face.</p></article>
+      <article><h3>2 · Edges show history</h3><p>Every extrusion is a stack of offset layers in alternating basalt tones. The sidewall is a cross-section, not a shadow.</p></article>
+      <article><h3>3 · One fault, fixed</h3><p>Editorial faces carry a single fault from (112,0) to (88,200) with a throw of 7. It displaces the beds and never erases them.</p></article>
+      <article><h3>4 · Newest layer is ferric</h3><p>Whatever was added most recently (top bar, active card, last deposit) takes the anchor hue.</p></article>
+      <article><h3>5 · Lower-right depth</h3><p>Oblique objects extrude at 45° to the lower-right. Scenes use 30° isometric. There is no lighting and no drop shadow.</p></article>
+      <article><h3>Native motion</h3><p>There are four verbs: deposit, settle, fault, hold. Each motion moves one thing at a time, and reduced motion shows the final held frame.</p></article>
+    </div>
+  </section>
+
+  <section>
+    <h2>1 · Technical scene</h2>
+    <p class="sub">True isometric, cycling wireframe → volume → material like the reference. The account surface rests on four strata plates: your balance is built from your deposits.</p>
+    <div class="frame"><img src="01-technical-scene.svg" alt="Animated isometric account surface with three floating cards and strata plates beneath"></div>
+    <div class="frame" style="margin-top:16px"><img src="01-technical-scene-states.svg" alt="The three construction states side by side"></div>
+  </section>
+
+  <section>
+    <h2>2 · Product pictograms</h2>
+    <p class="sub">Flat. Ferric carries the subject, and bedding appears only on the pale back plate. One definition yields three scale tiers.</p>
+    <div class="frame"><img src="02-product-icons.svg" alt="Six product icons at display, standard and micro sizes"></div>
+  </section>
+
+  <section>
+    <h2>3 · Editorial objects</h2>
+    <p class="sub">Rational (bulb, chart, document, naira), emotional (heart, shield) and abstract (question, transfer) subjects on a ferric field.</p>
+    <div class="frame"><img src="03-story-covers.svg" alt="Eight extruded editorial objects on a ferric field"></div>
+  </section>
+
+  <section>
+    <h2>4 · Motion: deposit, settle, fault, hold</h2>
+    <div class="duo">
+      <div class="frame"><img src="04-deposition-motion.svg" alt="Layers deposit one by one, then a fault displaces the right block"></div>
+      <div>
+        <p>Six layers fall and settle in sequence, and the final layer is always ferric. Then a fault shifts the right block 12 units. The record stays intact, which is the brand's argument about setbacks.</p>
+        <p style="color:var(--muted);font-size:14px">The timing is 8 s per loop: 0.55 s between deposits, then the fault at 4.1 s and a hold. With reduced motion, the final faulted stack is shown.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Remaining limits</h2>
+    <p class="sub">To keep this an honest proof:</p>
+    <p>Bedrock is still a fictional proof brand. The palette has not been contrast-tested against product UI, and the micro tier hasn't been pixel-hinted for 16 px. The next step is an unseen-asset test: give a designer only this page and ask for a "Withdraw" icon and a "Pension" cover.</p>
+  </section>
+</main>
+</body>
+</html>
