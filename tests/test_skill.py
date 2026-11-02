@@ -127,15 +127,50 @@ class SkillContractTests(unittest.TestCase):
         self.assertEqual(m.group(1), "brand-illustration-systems")
         self.assertLessEqual(len(m.group(2)), 1024)
 
-    def test_asks_for_preferred_direction_and_shows_three(self):
-        self.assertIn("Do you already have a direction in mind?", self.text)
+    def test_project_first_intake_and_three_directions(self):
+        self.assertIn("What is the brand or project", self.text)
+        self.assertLess(self.text.index("What is the brand or project"), self.text.index("style, source, reference"))
         self.assertIn("three directions", self.text.lower())
         self.assertIn("checkpoint", self.text.lower())
+
+    def test_constructive_method_is_part_of_contract(self):
+        low = self.text.lower()
+        for step in ("model the subject", "compose the action", "build the skeleton", "block the masses",
+                     "add volume and depth", "apply brand grammar", "reduce and verify"):
+            self.assertIn(step, low)
+        with open(os.path.join(SKILL, "references", "constructive-illustration.md"), encoding="utf-8") as f:
+            construction = f.read().lower()
+        for concept in ("contacts", "human riding a bicycle", "silhouette", "pattern-led"):
+            self.assertIn(concept, construction)
+
+    def test_references_do_not_determine_outcome(self):
+        low = self.text.lower()
+        self.assertIn("references are evidence, not recipes", low)
+        self.assertIn("do not inherit props, composition, palette, metaphor", low)
+
+    def test_design_research_is_isolated_from_examples(self):
+        low = self.text.lower()
+        self.assertIn("example-isolation contract", low)
+        self.assertIn("generate the metaphor longlist before selecting a rendering family", low)
+        self.assertIn("project fact → shared behaviour → candidate source", low)
+        with open(os.path.join(SKILL, "references", "research-and-translation.md"), encoding="utf-8") as f:
+            research = f.read().lower()
+        self.assertIn("start closed-book", research)
+        self.assertIn("research the source itself", research)
+        self.assertIn("pattern is one possible output, not the goal", research)
+        self.assertFalse(os.path.exists(os.path.join(SKILL, "references", "security-print-example.md")))
+        self.assertFalse(os.path.exists(os.path.join(SKILL, "templates", "build-template.mjs")))
+        self.assertFalse(os.path.exists(os.path.join(SKILL, "templates", "flat-spot-template.mjs")))
+        self.assertFalse(os.path.exists(os.path.join(SKILL, "templates", "flat_editorial_kit.py")))
+        with open(os.path.join(SKILL, "references", "reference-transfer.md"), encoding="utf-8") as f:
+            transfer = f.read().lower()
+        self.assertIn("new project-local kit", transfer)
+        self.assertIn("do not begin from a previous reference's kit", transfer)
 
     def test_directions_vary_family(self):
         low = self.text.lower()
         self.assertIn("rendering family", low)
-        self.assertIn("at most one may be pattern-led", low)
+        self.assertRegex(low, r"at most one\s+may be pattern-led")
         with open(os.path.join(SKILL, "references", "style-families.md"), encoding="utf-8") as f:
             fam = f.read().lower()
         for name in ("flat", "character", "line", "3d", "pattern", "technical", "device", "collage"):

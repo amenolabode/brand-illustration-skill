@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bedrock Illustration System</title>
+<title>Layered Savings Illustration System</title>
 <style>
   :root{
     --paper:#FBF6EC; --ink:#2B2236; --ink-2:#4A3D5A; --muted:#7A6E84; --rule:#E6D7BA;
@@ -65,7 +65,7 @@
 <body>
 <main>
   <div class="eyebrow">Brand illustration system · proof v2</div>
-  <h1>Bedrock: wealth is deposited layer by layer.</h1>
+  <h1>Layered savings: wealth is deposited layer by layer.</h1>
   <p class="lede">The v1 proof rendered a geology mood board. This version is a construction system: one pattern tile, one depth rule, one anchor hue and three modes. Every asset is generated from them as vector (<code>build.mjs</code>), so any designer can add an asset nobody has drawn yet.</p>
 
   <div class="chain">
@@ -82,7 +82,7 @@
     <div class="fail">
       <article><span class="tag v1">v1 failure</span><h3>Texture instead of pattern</h3><p>v1 painted <b>thick horizontal colour bands</b> with stone grain over every shape. Guilloché is fine, low-contrast linework <i>inside</i> a clean silhouette, so the shape reads first and the pattern second. v1 reversed that order. <b>Fix:</b> a 96×36 bedding tile, line colour one step darker than the face, 1.1 units wide.</p></article>
       <article><span class="tag v1">v1 failure</span><h3>Three modes collapsed into one</h3><p>The reference uses three different modes: <b>isometric linework</b> (scene), <b>flat pictograms</b> (icons) and <b>extruded objects</b> (covers). v1 rendered all three as the same chunky clay. <b>Fix:</b> true isometric scene, flat icons, oblique-extruded covers. They share tokens, not rendering.</p></article>
-      <article><span class="tag v1">v1 failure</span><h3>No anchor hue</h3><p>Cowrywise hangs everything on <b>one electric blue + one ink + pastels</b>. v1 spread five earth tones at equal weight, so nothing signals. <b>Fix:</b> Ferric (iron oxide, the pigment that actually bands red rock) is the only saturated colour. It marks the subject, the field and the newest deposit.</p></article>
+      <article><span class="tag v1">v1 failure</span><h3>No anchor hue</h3><p>The security-print reference uses <b>one electric blue + one ink + pastels</b>. v1 spread five earth tones at equal weight, so nothing signals. <b>Fix:</b> Ferric (iron oxide, the pigment that actually bands red rock) is the only saturated colour. It marks the subject, the field and the newest deposit.</p></article>
       <article><span class="tag v1">v1 failure</span><h3>Raster, lit, not reproducible</h3><p>v1's images came from an image model, with drop shadows, rendered lighting, a crack in a different place on every object, and no files a team could edit. That gives you a style sample, not a system. <b>Fix:</b> every asset is generated SVG from shared functions. Flat colour, no lighting, and the fault sits at the same angle and throw on every object.</p></article>
       <article><span class="tag v1">v1 failure</span><h3>No reduced states</h3><p>v1 documented "vector reduction at 16–24 px" as future work, but the skill names scalability as a requirement. <b>Fix:</b> three icon tiers are generated from one definition: bedding on the plate, then a plain plate, then the silhouette alone.</p></article>
       <article><span class="tag v1">v1 failure</span><h3>Fake motion</h3><p>v1's GIF was a storyboard image sliced into six crops, so the frames don't register and the block drifts between them. <b>Fix:</b> real CSS animation in the SVGs: layers deposit, settle and fault; target rings deposit; the date ticks. All three honour reduced motion.</p></article>
@@ -165,7 +165,7 @@
   <section>
     <h2>Remaining limits</h2>
     <p class="sub">To keep this an honest proof:</p>
-    <p>Bedrock is still a fictional proof brand. The palette has not been contrast-tested against product UI, and the micro tier hasn't been pixel-hinted for 16 px. The next step is an unseen-asset test: give a designer only this page and ask for a "Withdraw" icon and a "Pension" cover.</p>
+    <p>This remains a fictional proof project. The palette has not been contrast-tested against product UI, and the micro tier hasn't been pixel-hinted for 16 px. The next step is an unseen-asset test: give a designer only this page and ask for a "Withdraw" icon and a "Pension" cover.</p>
   </section>
 </main>
 </body>

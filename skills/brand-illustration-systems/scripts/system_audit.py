@@ -107,7 +107,8 @@ def audit(path, family="flat", max_anchor=None):
         return res
     els = list(root.iter())
     tags = [local(e.tag) for e in els]
-    raw = open(path, encoding="utf-8", errors="replace").read()
+    with open(path, encoding="utf-8", errors="replace") as source:
+        raw = source.read()
 
     def flag(level, msg):
         if level:

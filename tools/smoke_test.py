@@ -16,7 +16,7 @@ import tempfile
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SKILL = os.path.join(ROOT, "skills", "brand-illustration-systems")
 SCRIPTS = os.path.join(SKILL, "scripts")
-EXAMPLE = os.path.join(ROOT, "examples", "bedrock")
+EXAMPLE = os.path.join(ROOT, "examples", "layered-savings")
 
 GOOD = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
 <defs><pattern id="p" patternUnits="userSpaceOnUse" width="24" height="12">
@@ -84,7 +84,7 @@ def main():
     run("audit: v1-style asset fails", py("system_audit.py", bad),
         ["[FAIL]", "filter found", "saturated hues", "reads as bands", "contrast"], code=1)
     run("audit: json output", py("system_audit.py", good, "--json"), ['"file"'])
-    run("audit: bedrock example has no failures", py("system_audit.py", *[
+    run("audit: layered-savings example has no failures", py("system_audit.py", *[
         os.path.join(EXAMPLE, f) for f in sorted(os.listdir(EXAMPLE)) if f.endswith(".svg")]))
 
     spec = {
@@ -131,22 +131,6 @@ def main():
     write_png(glow_png, 120, 120, lambda x, y: (253, min(255, 238 + int(16 - ((x - 60) ** 2 + (y - 60) ** 2) ** .5 / 5)), 141))
     run("raster check: solid field passes", py("raster_check.py", flat_png), ["[PASS]", "100% solid"])
     run("raster check: glow fails", py("raster_check.py", glow_png), ["[FAIL]", "glow"], code=1)
-
-    node = shutil.which("node")
-    if node:
-        out_dir = os.path.join(tmp, "template")
-        run("template: node build", [node, os.path.join(SKILL, "templates", "build-template.mjs"), out_dir],
-            [os.path.join(out_dir, "03-story-covers.svg")])
-        run("template: output passes audit", py("system_audit.py", "--family", "pattern",
-                                                os.path.join(out_dir, "03-story-covers.svg")), ["[PASS]"])
-        flat_dir = os.path.join(tmp, "flat")
-        run("template: flat spot build", [node, os.path.join(SKILL, "templates", "flat-spot-template.mjs"), flat_dir],
-            [os.path.join(flat_dir, "spot-payment-sent.svg")])
-        run("template: flat spots pass audit", py("system_audit.py", "--family", "character", *[
-            os.path.join(flat_dir, f) for f in ("spot-payment-sent.svg", "spot-empty.svg", "spot-card-frozen.svg",
-                                                "scene-onboarding.svg")]), ["[PASS]"])
-    else:
-        print("[skip] template: node not installed")
 
     shutil.rmtree(tmp, ignore_errors=True)
     print(f"\n{len(failures)} failure(s)" if failures else "\nall smoke tests passed")

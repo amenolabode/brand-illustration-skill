@@ -1,4 +1,4 @@
-// Bedrock illustration system, v2.
+// Layered-savings illustration system.
 // Every asset is generated from the same tokens, pattern tiles and construction
 // functions, so the system is reproducible and scales as vector.
 // Run: node build.mjs
@@ -32,7 +32,7 @@ const FACES = ['sand', 'clay', 'lichen', 'slate', 'bone'];
 // ---------------------------------------------------------------- pattern
 // "Bedding": four undulating bedding planes per 96x36 tile, each with its own
 // amplitude and phase, plus one band of sand grains. Periodic in x and y so it
-// tiles seamlessly. This is the Bedrock equivalent of the guilloche mesh.
+// tiles seamlessly. This is the source-world equivalent of a fine security-print mesh.
 const TILE_W = 96, TILE_H = 36;
 const BEDS = [
   { y: 5, a: 1.6, ph: 0 },

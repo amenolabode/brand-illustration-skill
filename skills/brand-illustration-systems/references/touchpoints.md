@@ -1,8 +1,7 @@
 # Touchpoints
 
-Illustrations exist to do jobs in specific places. Map those places before choosing a style. Atlassian chooses
-illustration *types* by surface; Cash App's 2D system was mapped to a spectrum of in-app surfaces because not every
-illustration serves the same purpose. Do the same for every brand.
+Illustrations exist to do jobs in specific places. Map those places before choosing a style. Mature systems assign
+illustration types and density by surface because not every image serves the same purpose.
 
 ## 1. Inventory the surfaces
 
@@ -24,7 +23,7 @@ List every place an illustration does or could appear.
 For each touchpoint note whether the moment is **functional** (routine task), **sensitive** (money lost, fraud, error,
 debt, health) or **celebratory** (goal reached, first payment, milestone). The same style rarely fits all three: the
 character that celebrates a goal should not appear on a fraud alert. Record where illustration should be neutral or
-absent. Atlassian advises against overusing illustration, because icons or copy are often enough.
+absent. Do not overuse illustration when an icon or clear copy is enough.
 
 ## 3. Pick the proof touchpoints
 

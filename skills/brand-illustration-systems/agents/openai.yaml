@@ -1,4 +1,4 @@
 interface:
   display_name: "Brand Illustration Systems"
-  short_description: "Build scalable illustration systems from brand ideas"
-  default_prompt: "Map where this brand needs illustrations, propose three directions in different rendering families, and build the one I pick as a coherent system."
+  short_description: "Construct brand illustrations and scalable visual systems"
+  default_prompt: "Understand this brand or project, its guidelines, touchpoints, and illustration needs; derive and research metaphors from current-project evidence without consulting examples; propose distinct directions; then construct each selected subject from structural guides and primitives through branded form, finish, reduction, and validation."

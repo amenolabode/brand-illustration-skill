@@ -4,7 +4,7 @@
 
 | Family | Production source of truth | Agent can build directly |
 |---|---|---|
-| Flat spot, technical, brand device, pattern-led | Editable SVG/Figma from shared tokens and construction rules | Yes: generated or hand-written SVG (`templates/flat-spot-template.mjs`, `templates/build-template.mjs`) |
+| Flat spot, technical, brand device, pattern-led | Editable SVG/Figma from project-specific tokens and construction rules | Yes: generated or hand-written SVG after direction selection |
 | Character-led | Character sheet (construction shapes, ratios, turnaround, expressions) + SVG assets | Yes, for simple primitive-built characters; recommend an illustrator for a signature cast |
 | Expressive line | Brush/line spec, figure conventions, reference board + assets | Direction samples only; recommend commissioning an illustrator |
 | Soft 3D | Scene kit: camera, lights, materials, bevels (Blender/Spline/C4D) + renders | SVG gradient approximations or labelled image-model exploration for samples; a 3D tool for production |
@@ -12,7 +12,8 @@
 
 ## Proof route for 2D families: parametric vector
 
-Prove the system with editable vector assets generated from shared definitions. A starter generator is `templates/build-template.mjs`. The repository's `examples/bedrock/` folder holds a complete worked run.
+Prove the system with editable vector assets generated from definitions written for the selected project's source logic.
+Do not begin from a worked-example generator: create tokens, primitives and operations from the chosen direction.
 
 1. **Tokens:** colours by role (anchor, ink, faces, each with a pattern line one step darker).
 2. **Pattern tile:** a seamless `<pattern>` built from the source primitives. Record the tile size, line count, amplitude, phase and stroke width.
@@ -88,13 +89,16 @@ After generation, inspect:
 
 If a generation drifts, revise one variable at a time and repeat the full shared system block.
 
-## Known failure (Bedrock v1)
+## Known failure: pattern weight and mode collapse
 
-The first proof run used image generation for every family. The meaning chain was right, but the output failed the reference. It had thick stripes painted over the shapes, one clay material across all three modes, five equal-weight colours, rendered lighting, a crack drawn differently on every object, no real scale tiers, and a sliced-storyboard GIF. Its validation passed because it checked the prompt rather than the pixels. The repository's `examples/bedrock/index.html` documents the corrections.
+An earlier proof run used image generation for every family. The meaning chain was right, but the output had thick
+stripes over shapes, one material across all modes, equal-weight colours, inconsistent details, no real scale tiers,
+and a sliced-storyboard animation. Its validation checked the prompt rather than the pixels. The lesson is to validate
+rendered assets and editable rules, not verbal intent.
 
-## Known failure (Scan, pattern anchoring)
+## Known failure: pattern anchoring
 
-Run on a new brand after the Bedrock fix, the skill offered three directions (print registration, lens rings, loom
+In a later project, the skill offered three directions (print registration, lens rings, loom
 weave) that were all the same family: a patterned object on a coloured square with an offset edge. Only the pattern
 content differed. Causes: the sample spec demanded a pattern tile, the overview sheet had a fixed pattern slot, the audit
 warned when no `<pattern>` existed, and the only worked example was pattern-led. Fixes: directions are now idea plus

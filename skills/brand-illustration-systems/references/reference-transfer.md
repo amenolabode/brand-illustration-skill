@@ -1,8 +1,9 @@
 # Reference transfer: learn a piece by rebuilding it, then apply it to a new subject
 
 Use this when the user shares a single illustration (not a whole system) and asks you to recreate it, explain how it
-works, or "do this, but for a laptop / our product / our brand". The reference is the preferred direction, so the
-style is fixed; the options you show are three **subject compositions** in that style.
+works, or "do this, but for a laptop / our product / our brand". The reference constrains documented execution
+qualities; it does not determine the new subject's metaphor, props, composition, or brand identity. The options you
+show are three **subject compositions** constructed for the new brief within those constraints.
 
 The method is an illustrator's apprenticeship, not a description exercise: **measure → rebuild → score → iterate**
 until the vector matches, then write down what the match taught you, package it as a kit, and only then draw the new
@@ -10,12 +11,13 @@ subject with that kit. Describing a style in adjectives and then drawing "someth
 rules that make a style read are numeric (angles, periods, radii, which colour owns which pattern) and you only find
 them by trying to reproduce the piece and seeing where you miss.
 
-A finished transfer has four parts:
+A finished transfer has five parts:
 
 1. a **decomposition** (seven layers, written as rules with numbers);
 2. a **recreation** scored against the reference, which proves the rules are complete;
-3. a **kit** (`templates/flat_editorial_kit.py` for the flat editorial family) holding those rules as functions;
-4. a **transfer**: three options for the new subject built with the kit, self-critiqued, presented on one sheet.
+3. a **new project-local kit** holding the measured rules as functions, generated from this supplied reference only;
+4. a **new-subject construction**: subject model, thumbnails, skeleton, primitive block, volume/overlap and clean form;
+5. a **transfer**: three options for the new subject built with the kit, self-critiqued, presented on one sheet.
 
 **Study, not shipping.** A close recreation of a living illustrator's piece is a study for understanding. Keep it out
 of deliverables and public repos, never present it as the brand's or your own original work. If the user wants that
@@ -49,6 +51,10 @@ Work from the largest decisions to the smallest. Write each layer as rules, not 
 Separate three things that are easy to blur: **subject recognition** (what makes the subject readable),
 **brand geometry** (the shape language) and **surface pattern** (what fills the planes). A transfer keeps the second
 and third and rebuilds the first for the new subject.
+
+The seven layers describe the reference's visible result. They do not replace the drawing process. When constructing
+the new subject, follow `constructive-illustration.md`: subject model → composition → skeleton → masses → volume →
+clean form, then apply the extracted geometry and surface kit.
 
 ## 3. Rebuild and score: the loop
 
@@ -88,18 +94,19 @@ loop. Stop when the misses left are hand-placed details (individual drips, a rib
 
 ## 4. Package the rules as a kit
 
-Turn the rules into functions in one file, with every size as a fraction of canvas width so they work at any size.
-For flat editorial, start from `templates/flat_editorial_kit.py`: `stripes` (horizontal or vertical), `radial` (ring
-stripes), `dots` (fixed-direction column lattice), `polka`, `pinstripe`, `contour` (tapered, sized to its shape),
-`overlap` (the overlap turns the anchor colour), `deep_gradient` (the one shaded plane), plus `ribbon`, `sector`,
-`smooth`, `heart` and `capsule` primitives. The palette is held as roles (`field, anchor, main, calm, light, cool,
-accent, pop, deep`); for a brand, swap the hexes and keep the roles. For another family, write the same kind of kit
-from that reference's measurements.
+Turn the measured rules into functions in a new file, with every size as a fraction of canvas width so they work at
+any size. Define only the primitives, pattern operations, overlaps, colour roles and depth behaviours demonstrated by
+the supplied reference. Do not begin from a previous reference's kit or swap colours into inherited functions: the
+purpose of the rebuild is to discover this reference's own rules.
 
 ## 5. Transfer roles, not objects
 
 Write a role map before drawing. Every element of the reference has a **role**; find the element of the new subject
 that can play it.
+
+Before applying the role map, build the new subject without pattern or rewards. Identify its essential parts, axes,
+hinges and contact points; make composition thumbnails; construct its skeleton and primitive silhouette; then resolve
+volume and occlusion. The kit styles this construction—it does not invent or correct it.
 
 | Reference element | Its role | Laptop element |
 |---|---|---|
@@ -156,9 +163,11 @@ SKILL.md, with a recommendation.
 | Large-shape test | `render_png.py --silhouette` and `--grey` | The subject is recognisable as a silhouette; the composition works before pattern and colour |
 | Pattern-owner test | Compare the role map with the artwork | Every pattern sits on the role it owns in the reference |
 | Prop test | List every secondary object | None carried over from the reference, including disguised copies |
+| Construction test | Hide pattern, rewards and colour | Structure, contacts, proportions, silhouette and occlusion still work |
 | Projection test | Compare horizon and angle | Same projection; any lean is an in-plane rotation |
 | Movement test | Trace the main curve across the composition | One continuous movement through about two-thirds of the canvas |
 | Flat-field and palette | `raster_check.py` (raster), `system_audit.py --family editorial` (SVG) | No glow or vignette; four saturated hues at most, each in its role; at most one gradient |
+| Independence test | Explain each major choice from the new brief | Reference supplies execution qualities, not borrowed subject logic |
 
 ## Worked example: what an earlier image-model run got right and wrong
 

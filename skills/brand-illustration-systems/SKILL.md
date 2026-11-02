@@ -1,17 +1,23 @@
 ---
 name: brand-illustration-systems
-description: Designs brand illustration systems for any brand. It maps the brand's touchpoints (empty states, onboarding, success moments, marketing heroes), then proposes three genuinely different directions, each pairing an idea from the brand with a rendering family (flat spot, character-led, expressive line, soft 3D, pattern-led, technical, brand device or collage, as in Klarna, Monzo, Cash App, Revolut, Duolingo, Mailchimp or Cowrywise). It asks first whether the user has a preferred direction, shows the three options on one overview sheet with a recommendation, and builds the full system only after the user picks. Use whenever the user wants illustrations, an illustration style or system, spot illustrations, icon families, empty-state or onboarding art, editorial or campaign imagery, brand patterns, 3D brand assets or illustration motion created, refreshed, extended, audited, reverse-engineered, or recreated from a reference and applied to a new subject, even if they don't say "system".
+description: Creates, extends, audits, reverse-engineers, or transfers brand illustrations and illustration systems. Starts by understanding the brand or project, its audience, identity, touchpoints, and required subjects; proposes three distinct visual directions when direction is open; then constructs each subject from gesture and structural geometry through volume, detail, brand surface, colour, light, and motion. Use for spot illustrations, icon families, empty states, onboarding art, editorial or campaign imagery, characters, technical scenes, patterns, 3D assets, motion, or recreating a reference and applying its principles to a new subject. References inform execution qualities but never determine the outcome.
 ---
 
 # Brand Illustration Systems
 
-You are acting as a senior brand illustrator and system designer. An illustration system is **an idea drawn through a
-rendering family and applied by touchpoint**: where illustrations live decides what kind they must be; the brand's idea
-decides what they say; the family decides how they are drawn. The result is rules another designer can use to make an
-asset nobody has drawn yet.
+Act as a senior brand illustrator and system designer. Build illustrations for the project in front of you, not for
+the examples in this skill.
 
-Pattern-on-an-object (the Cowrywise approach) is one family among eight. Never let one reference, including the
-examples in this skill, become the default look. Variety comes from choosing the family deliberately for each brand.
+The operating sequence is:
+
+`project → brief → direction → subject construction → brand grammar → finish → validation`
+
+An illustration system is an idea expressed through repeatable construction rules and applied by touchpoint. The idea
+decides what the work means; the rendering family decides how it is drawn; the construction method makes the subject
+correct; the touchpoint decides its density and scale.
+
+**References are evidence, not recipes.** Extract their execution qualities and construction logic only when the user
+supplies or requests reference analysis. Do not inherit props, composition, palette, metaphor, or rendering family.
 
 Reply in the user's language. Keep the process visible but light: short explanations, real files, clear choices.
 
@@ -19,219 +25,239 @@ Reply in the user's language. Keep the process visible but light: short explanat
 
 | The user wants… | Mode | Start with |
 |---|---|---|
-| A new illustration system | **Design**: full workflow below | Phase 1 |
-| To understand or replicate a reference system | **Reverse-engineer** | `references/research-and-translation.md` §Reference analysis, `references/reference-systems.md` |
-| To recreate one illustration and apply its direction to a new subject ("do this, but for a laptop") | **Transfer** | `references/reference-transfer.md`: decompose in seven layers, rebuild the reference as vector and score it with `match_score.py` until the misses are craft rather than rules, package the rules as a kit, then build three compositions of the new subject with it |
-| New assets for an existing system | **Extend** | Read their spec and touchpoint map, then Phase 7 for only the requested assets |
-| Feedback on illustrations or a direction | **Audit** | `references/system-spec-and-validation.md`, `scripts/system_audit.py` |
+| A new illustration or system | **Design** | Phase 1 |
+| To understand a reference | **Reverse-engineer** | `references/research-and-translation.md` and `references/reference-systems.md` |
+| To recreate one illustration and apply its direction to a new subject | **Transfer** | `references/reference-transfer.md`, then the construction spine below |
+| New assets in an existing system | **Extend** | Read the existing spec, confirm subjects and touchpoints, then Phases 6–9 |
+| Feedback on illustrations or a direction | **Audit** | `references/system-spec-and-validation.md` and `scripts/system_audit.py` |
 
-**Fast track** (the user wants results now or gives little information): send the intake in one message, or skip it,
-state your assumptions, and go straight to three directions.
+**Fast track:** never skip understanding what the project is. If information is sparse, state a provisional project
+brief, identity, subject list, and production assumptions, then continue. Label generated brand rules as provisional.
 
-**Direction checkpoint: show three options before building the system.** Every Design run stops after the three
-directions are built and rendered (Phase 6). Show the overview sheet, one line per direction and your recommendation,
-then *offer* the full system and wait. Skip the pause only when the user explicitly says not to check in.
+**Direction checkpoint:** when direction is open, show three options and wait after Phase 5. Skip the pause only when
+the user explicitly requests a direct build. In Transfer or Extend mode, the visual direction may already be fixed;
+offer two or three composition sketches for the requested subject instead.
 
 ## Tools in this skill
 
-Dependency-free Python 3 scripts in `scripts/` next to this SKILL.md (Claude Code: `${CLAUDE_SKILL_DIR}/scripts/`).
-Run them with `python3` and the full path; on Windows use `python` or `py -3`.
+Dependency-free Python 3 scripts live in `scripts/` next to this file.
 
 | Script | Use it to |
 |---|---|
-| `direction_sheet.py` | Build the three-option overview: each direction's family, signature element, the same spot moment and the same scene moment, palette, idea, rules and risk, with a recommendation |
-| `system_audit.py` | Check SVG assets against the chosen family (`--family flat|editorial|character|line|3d|pattern|technical|device|collage`): rasters, filters, gradients, colour discipline, pattern weight where relevant. `editorial` is bold flat figurative work: up to four saturated hues held to roles, one gradient for the depth plane |
-| `render_png.py` | Render SVG or HTML to PNG (headless Chrome/Chromium, rsvg-convert, cairosvg, Inkscape) so you can look at your work; `--silhouette` and `--grey` for the large-shape and value tests |
-| `raster_check.py` | Check raster exploration (image-model PNGs) for a background that isn't one solid fill (glow, vignette, noise) and a smeared palette; warns when a PNG carries a non-sRGB colour profile, so its sampled hexes would be wrong |
-| `match_score.py` | Score a vector recreation against its reference: agreement, per-colour IoU, the worst regions and a diff image. The loop that turns "make it match" into a number |
+| `direction_sheet.py` | Compare three directions using the same spot and scene moments |
+| `system_audit.py` | Audit SVGs by family: `flat|editorial|character|line|3d|pattern|technical|device|collage` |
+| `render_png.py` | Render SVG/HTML; use `--silhouette` and `--grey` for form and value tests |
+| `raster_check.py` | Check raster explorations for unwanted texture, palette drift, and non-sRGB profiles |
+| `match_score.py` | Score a vector recreation against a reference and expose the worst regions |
 
-Templates (no dependencies): `templates/flat-spot-template.mjs` (flat spot illustrations with a primitive-built
-character and one accent), `templates/build-template.mjs` (pattern-led system with isometric scene and extruded
-objects) and `templates/flat_editorial_kit.py` (Python: the flat editorial grammar measured in a Transfer study:
-striped and radial planes, fixed-direction dot ribbons, tapered contours, overlaps that turn black, one depth
-gradient, palette by role). Use them as structure, not as looks to copy.
+**Look at the work.** Render after every meaningful change and inspect the image. Never claim a check you did not run.
 
-**Look at your work.** Render after every meaningful change, open the PNGs and actually look. If you cannot render,
-say so. Never claim a check you did not run.
+## Example-isolation contract
+
+In **Design** mode, begin without internal worked examples, repository examples, templates, or prior project metaphors.
+Do not inspect them during brand research, metaphor generation, or direction selection. They are not evidence about the
+current project.
+
+- Derive every metaphor candidate from a stated fact in the current brief, product, audience, identity, or behaviour.
+- Generate the metaphor longlist before selecting a rendering family or researching visual styles.
+- Research the real-world source behind each shortlisted metaphor; do not search for “illustration styles like X.”
+- Use production templates only after a direction is selected, and only as implementation scaffolding with all visual
+  tokens and source logic replaced by the chosen project's rules.
+- Use `reference-transfer.md` and its specialised kit only in **Transfer** mode, when the user supplied that reference.
+
+If a candidate cannot be traced to current-project evidence, discard it. Similarity to an internal example is a reason
+to re-derive the candidate, not evidence that it fits.
+
+## The construction spine
+
+Use this for every subject in every family. Read `references/constructive-illustration.md` before drawing a complex
+person, object, vehicle, scene, or abstract process.
+
+1. **Model the subject.** Identify what it is, what it is doing, its essential parts, axes, joints, contact points,
+   functional relationships, and the one read that must survive reduction. Gather subject references for accuracy.
+2. **Compose the action.** Set crop, focal hierarchy, negative space, ground line, dominant gesture or movement path,
+   and relationship to copy or UI. Make two or three thumbnails when the composition is not already fixed.
+3. **Build the skeleton.** Draw only guides: axes, wheels, frame, spine, joints, hinges, bounding boxes, perspective grid,
+   or an interaction graph. Lock proportions and contact points before styling.
+4. **Block the masses.** Replace guides with circles, polygons, ribbons, cylinders, and silhouette planes. Establish
+   overlap and negative shapes. The black silhouette must already read.
+5. **Add volume and depth.** Define front/side/top planes, occlusion, foreshortening, folds, extrusion, or spatial
+   layers. Depth can be flat overlap, line weight, projection, shading, or true 3D—use only what the family permits.
+6. **Refine the form.** Add identity-bearing and functional details, clean paths, consistent corners and terminals,
+   then remove detail that does not improve recognition, meaning, or character.
+7. **Apply brand grammar.** Map palette roles, pattern owners, line rules, materials, devices, and typography-derived
+   geometry onto the constructed form. A pattern follows its owning surface; it does not repair a weak silhouette.
+8. **Finish with colour, light, and motion.** Establish value hierarchy first. Add light only if native to the family.
+   Motion must explain cause, state, or action and must have a reduced-motion frame.
+9. **Reduce and verify.** Test silhouette, grayscale, minimum size, contrast, anatomy/function, contacts, occlusion,
+   projection, and production editability. Fix the earliest failed layer rather than decorating over it.
+
+This is a sequence of decisions, not a required visual look. A flat illustration may stop at shape planes; an expressive
+line family may keep the skeleton visible; a 3D family turns the same masses into geometry; a pattern-led family earns
+its pattern only after the unpatterned form works.
 
 ## Design workflow
 
-### Phase 1: Intake, including the preferred direction
+### Phase 1: Understand the brand or project
 
-Ask at most five questions in **one** message (`references/intake.md` has the wording). Use a multiple-choice question
-tool for question 1 if your environment has one. The first question is always:
+Ask at most five questions in one message; use `references/intake.md`. The first thing to establish is:
 
-> **Do you already have a direction in mind?**
-> (a) Yes: a style, brand you admire, source, material or reference. Tell me what it is.
-> (b) Partly: a feeling, some references or things to avoid.
-> (c) No: research and propose three directions for me.
+> **What is the brand or project, who is it for, and what must the illustrations help people understand, feel, or do?**
 
-The others cover: the brand tenet; **where illustrations will live** (touchpoints); existing identity (logo, type,
-palette, mascot, photography); who will produce assets later and with which tools. Skip anything already answered.
+Then establish, without repeating known information:
 
-- **(a)** If they name a style or brand ("energetic line like Monzo", "3D like Cash App"), that fixes the family
-  once you have confirmed which family the reference actually uses. The three options
-  become three different ideas in that family. If they name a source ("Adire textiles"), the three options are three
-  translations of it in **different families**. Offer an alternative in one line at most; never swap it in.
-- **(b)** Treat references and dislikes as constraints, then vary the family across the three.
-- **(c)** Vary the family across the three.
+- the promise, customer transformation, personality, category, and visual clichés to avoid;
+- where the work will live and the emotional temperature of those moments;
+- brand guidelines and assets: logo, palette, type, layout, imagery, motion, accessibility, existing illustrations;
+- whether the user has a style, source, reference, or rendering family in mind;
+- whether they have a specific illustration list or want an aligned set proposed.
 
-### Phase 2: Strategy
+Read the product, interface, codebase, or supplied guidelines when available. If no guidelines exist, synthesize a
+small provisional identity—colour roles, shape language, line/depth rules, and type relationship—and label it clearly.
+If no subject list exists, propose one spanning functional, sensitive, and celebratory moments rather than choosing
+arbitrary decorative objects.
 
-Write one strategic sentence with a verb and a productive tension. Add three **"X but not Y" tone fences** (Cash App's
-method), e.g. "warm but not cute", "precise but not cold", "confident but not loud". List the category's visual clichés
-as off-limits unless given a fresh form.
+### Phase 2: Frame strategy, touchpoints, and subjects
 
-### Phase 3: Touchpoint map
+Write one strategic sentence with a verb and productive tension. Add three `X but not Y` tone fences. List category
+clichés as off-limits unless transformed.
 
-Inventory where illustrations will live, assign each a tier (micro, spot, scene, hero, ambient, motion) and an emotional
-temperature (functional, sensitive, celebratory), and choose **two proof moments**: one product spot and one scene or
-hero. Read the product's UI or codebase if it's available. Follow `references/touchpoints.md`.
+Map touchpoints by tier and emotional temperature with `references/touchpoints.md`. Choose the smallest required size,
+one shared product spot, and one scene/hero proof moment. Confirm the illustration brief:
 
-### Phase 4: Ideas and families
+- **subject** and required action/state;
+- **message** the image must carry;
+- **placement**, crop, copy/UI relationship, and size;
+- **must-show / must-avoid** details;
+- **deliverables** and production route.
 
-Generate ideas from three wells, not just one:
+### Phase 3: Generate and research project-specific metaphors
 
-1. **The brand's own assets:** logo geometry, typeface curves and cuts, product notation, UI shapes (Klarna built its
-   in-product system from its typography's curvature and italics).
-2. **A source world:** materials, crafts, sciences, notations (Cowrywise's guilloché; Robinhood's financial graphs).
-   See `references/research-and-translation.md`.
-3. **A story or cast:** characters, a recurring device, a narrative world (Duolingo's cast; Mailchimp's Cube).
+First generate a closed-book longlist from current-project evidence only:
 
-Write a longlist of 6–10 one-line ideas. Then choose rendering families with `references/style-families.md`, scoring
-them against tone fences, touchpoints, smallest size, production capacity and existing equity. Form **three directions,
-each an idea plus a family** (or a family pairing by tier, like Cash App's 2D spots with 3D heroes).
+1. Extract the project's nouns, verbs, tensions, transformations, rituals, mechanisms, relationships and identity
+   geometry.
+2. Reframe each useful fact as a generative question: what real process behaves this way, what structure organises
+   relationships this way, what records change this way, or what action produces the same transformation?
+3. Generate 8–12 candidate metaphor territories from at least four different project facts. Attach an evidence chain
+   to every candidate: `project fact → shared behaviour → candidate source`.
+4. Remove category clichés, unexplained aesthetic preferences, and anything recalled from repository examples.
 
-The three must differ in family, unless the user fixed the family in Phase 1. At most one may be pattern-led unless the
-user asked for pattern. For each, write: the idea, the meaning chain (`tenet → idea → visual rule → use`), two to five
-invariants, the family's construction rules and its motion behaviour. `references/direction-options.md` has the details.
+Only then shortlist 3–5 sources and research them with `references/research-and-translation.md`. Research what each
+source means, how it is made, its native geometry or marks, how it changes over time, its provenance and permissions,
+and whether its rules work at the required sizes. If the source produces repetition, derive a possible pattern from its
+actual repeat unit and operations. Do not force every source to become a pattern.
 
-### Phase 5: Build three direction samples (lean, comparable)
+Score the researched candidates for semantic fit, distinctiveness, generative range, touchpoint range, reduction,
+motion, feasibility, accessibility and stewardship. Keep a research ledger with citations and distinguish facts from
+inference.
 
-Each direction gets exactly these, built from the brand's tokens:
+### Phase 4: Turn metaphors into three visual directions
 
-1. **Signature element:** what makes the family ownable. A pattern tile (pattern-led), a character turnaround or head
-   (character), a brush and line swatch (line), a material and lighting swatch (3D), the device in three states (device),
-   or a grid and annotation sample (technical).
-2. **The same product spot moment** in all three, shown in context (a phone frame or the real component) where possible.
-3. **The same scene or hero moment** in all three.
-4. Palette, idea, meaning chain, tone fences met, motion verb and one honest risk.
+Pair the three strongest researched metaphors with rendering families from `references/style-families.md`. The family
+is chosen after the metaphor, so examples of a family cannot generate the idea. Score against tone fences,
+touchpoints, smallest size, production capacity, accessibility, and existing equity. Form three genuinely different
+directions—each `project evidence + metaphor + rendering family + construction logic`—unless the user fixed the family.
+At most one may be pattern-led unless requested.
 
-Build 2D samples as SVG. For 3D, approximate in SVG with gradients and label it, or use an image model labelled as
-exploration. The production system must still come with real source files. Run `system_audit.py --family <family>` on
-every SVG, render everything, and render the spot with `--silhouette`: if the subject isn't recognisable as a black
-shape, fix the large shapes before adding pattern or detail. Check raster exploration with `raster_check.py`.
+Each direction must show its evidence chain, research basis, meaning chain, invariants, construction rules, colour
+roles, motion behaviour, reduction, and one risk. A supplied reference may constrain execution qualities; it cannot
+replace project reasoning.
 
-### Phase 6: Show the three options, then stop (checkpoint)
+### Phase 5: Build and show comparable direction samples
 
-```bash
-python3 scripts/system_audit.py --family flat directions/a/*.svg
-python3 scripts/direction_sheet.py directions.json -o directions.html
-python3 scripts/render_png.py directions.html --out-dir renders --width 1600 --height 1400
-```
+For each direction create:
 
-Look at the PNG yourself, then cover the names and check that the three are distinguishable at a glance. If two look
-alike, replace one. Present in the format under "Presenting directions in chat" and **wait**:
+1. a signature element or construction swatch;
+2. the same product spot moment;
+3. the same scene/hero moment;
+4. one small strip showing `skeleton → blocked form → branded finish` for the spot;
+5. palette, idea, meaning chain, tone fences met, motion verb, and one honest risk.
 
-> Want me to build the full system for the direction you choose? It covers every touchpoint tier in the map: micro icons,
-> spots for the key product moments, scenes, a hero, motion, and a spec with the touchpoint map and construction rules.
+Build 2D work as SVG. For 3D, provide real scene sources or label SVG/raster approximations as exploration. Audit,
+render, inspect, and silhouette-test all samples. Use `direction_sheet.py` for the overview. Cover names and check that
+the directions remain distinct. Present a recommendation and wait for a selection unless the user waived the checkpoint.
 
-Mixing parts of two directions is allowed. Name the combined invariants so the result does not become a collage.
+### Phase 6: Sketch the selected subjects
 
-**In Transfer mode** the style is fixed, so the three options are three compositions of the new subject in that style,
-differing in idea and movement. Build them with the kit you extracted (not freehand), render the same spot and scene
-moment for each, and set `"same_family": true` on the sheet. Before showing the sheet, critique it beside the
-reference at the same size, using the failure table in `references/reference-transfer.md` §5. Fix what fails, then
-present it with a recommendation and wait, as above.
+For each requested subject, make two or three lean composition options unless composition is already specified. Keep
+them at skeleton/block level so decisions are cheap. Show differences in action, crop, hierarchy, and movement—not just
+colour. Recommend one, or proceed with the strongest when the user requested uninterrupted execution.
 
-### Phase 7: Build the system (only after the user picks)
+In Transfer mode, first rebuild and score the reference, extract a kit and role map, then use the kit to construct the
+new subject. The new compositions must retain execution qualities while replacing the reference's subject logic and
+props with roles appropriate to the new brief.
 
-Build what the touchpoint map needs, by default:
+### Phase 7: Construct the chosen illustration
 
-1. **Micro:** 6–12 icons or small illustrations at their real sizes, with a reduced state.
-2. **Spots:** 6–8 product moments covering functional, sensitive and celebratory temperatures.
+Follow the construction spine in order and retain evidence of the layers. For complex assets, deliver a construction
+sheet beside the final: reference/subject model, gesture and skeleton, primitive block, volume/overlap, clean form,
+brand surface, final, and reduced state. Describe decisions concretely enough that another designer can reproduce them.
+
+Do not add pattern, texture, lighting, or flourishes before proportion, contacts, silhouette, and overlap are correct.
+If a human rides a bicycle, for example, the wheel/frame geometry and the rider's hand–handlebar, foot–pedal, and
+pelvis–saddle contacts are resolved before clothes, facial detail, or motion lines.
+
+### Phase 8: Expand into a system
+
+Build only what the touchpoint map needs. A typical system includes:
+
+1. **Micro:** 6–12 icons or reduced illustrations at real size.
+2. **Spots:** 6–8 product moments across functional, sensitive, and celebratory states.
 3. **Scenes:** 2–3 onboarding or explainer scenes.
-4. **Hero:** 1–2 marketing or campaign images.
-5. **Motion:** one real animation (CSS/SMIL, Lottie, Rive or video) with a reduced-motion state.
-6. **Spec page (HTML):** strategy, tone fences, touchpoint map, family construction rules, tokens, invariants, each tier
-   in use and in context, motion, and do/don't.
+4. **Hero:** 1–2 campaign or marketing images.
+5. **Motion:** one real animation plus reduced-motion state.
+6. **Spec:** strategy, touchpoints, construction spine, family rules, tokens, invariants, subject recipes, examples,
+   motion, accessibility, and do/don't.
 
-2D families: editable vector generated or built from shared tokens and construction rules
-(`references/production-prompts.md`). 3D: a scene kit (camera, lights, materials) plus renders. Line and character
-families: brush, figure and character sheets plus the assets. A raster image-model output is never the production system.
+2D systems require editable vectors and shared tokens. 3D requires camera, light, material, and scene rules plus source
+files. Line and character systems require brush, anatomy/figure, expression, and pose guidance. Raster image-model
+output may explore a direction but is never the production system by itself.
 
-**Execution qualities.** Every family has qualities that make it work (listed in `references/style-families.md`). When
-the user admires a reference, list that reference's qualities and keep them. Generic ones that apply to all families:
-one accent with disciplined colour roles; one consistent projection or camera; detail that stops before it fights the
-UI; a defined reduced state; and motifs that sit in the same place every time.
+### Phase 9: Validate and hand over
 
-### Phase 8: Validate and hand over
+Use `references/system-spec-and-validation.md`. Audit and render every asset. Confirm:
 
-Run `system_audit.py` with the family on every asset, render everything and check
-(`references/system-spec-and-validation.md`):
+- subject anatomy/function, proportions, contact points, and occlusion make sense;
+- the subject reads at real size, in silhouette, grayscale, and reduced state;
+- brand ownership survives without logo and primary colour;
+- sensitive moments are restrained and celebratory ones carry the most expression;
+- source files are editable and a new designer can construct an unseen asset from the spec;
+- references influenced stated qualities only; new props, composition, metaphor, and details arise from the project;
+- provenance, permissions, and commissioned contributors are documented.
 
-- Subjects are recognisable without explanation, at their real touchpoint size, and as a silhouette
-  (`render_png.py --silhouette`) before pattern and colour.
-- Sensitive moments are handled with restraint, and celebratory moments carry the most expression.
-- A designer could make a new asset for an unlisted screen from the spec alone (the unseen-asset test).
-- The system is related across tiers without depending only on colour.
-- Placed beside any reference the user admired, the work matches its execution qualities. Report mismatches.
-- Sources, commissioned artists and cultural references are credited and permitted.
+## Red flags
 
-## Presenting directions in chat (the checkpoint message)
-
-```markdown
-<direction overview image>
-
-### A — <Name> · <family> · <idea source>   ← recommended
-**Idea:** <one sentence>
-**Looks like:** <one sentence on rendering: line, shape, colour, depth>
-**Why it fits:** <tone fences and touchpoints it serves>
-**Risk:** <one honest risk>
-
-### B — … / ### C — …  (same shape)
-
-**My recommendation:** <one or two sentences>
-**Next:** pick a direction, or tell me what you like in each. Want me to build the full system for it?
-```
-
-## Red flags: fix before showing anything
-
-- Three directions in the same family, or that differ only in pattern or colour.
-- Every asset as "an object on a coloured square". Real touchpoints have UI, copy and white space around them.
-- Defaulting to the last reference seen (including Cowrywise or Bedrock in this skill).
-- Generic corporate flat: faceless people, stock poses, nothing ownable.
-- A character or joke appearing on a sensitive moment (fraud, loss, debt, error).
-- Drop shadows, gradients or filters used to rescue weak forms in a flat family; inconsistent camera or lighting in 3D.
-- Imitating a living illustrator's or studio's signature style; labelling an invented motif as belonging to a culture.
-  A close recreation of someone's piece is a study, never a deliverable.
-- In a transfer: the reference's props copied into the new subject (including disguised copies, like a book wearing
-  the gift's ribbon), patterns moved off the roles they own, or the projection changed (frontal reference,
-  three-quarter result).
-- In a transfer: describing the style in adjectives without rebuilding and scoring the reference; sampling hexes from
-  a PNG with a display colour profile; contours sized to the canvas instead of their shape (they vanish); black masses
-  with no pattern or calm plane breaking them; a subject parked mid-canvas with props around it instead of one big
-  movement.
+- Asking for style before understanding what the brand/project is.
+- Choosing arbitrary subjects when product moments could prove the system.
+- Three directions that differ only in pattern or colour.
+- Styling a subject before its structure, contacts, silhouette, and overlaps work.
+- Using pattern, gradients, shadows, or detail to rescue weak form.
+- Generating metaphors from an internal example, template, familiar trend or rendering family rather than project evidence.
+- Researching “illustration styles like…” before researching the shortlisted real-world source.
+- Copying reference props, composition, palette, metaphor, or projection without project justification.
+- Generic corporate figures, stock poses, or characters/jokes in sensitive moments.
+- A raster-only “system,” fake motion made from sliced stills, or untested minimum sizes.
+- Imitating a living illustrator's signature style or inventing cultural provenance.
 
 ## Honesty and limits
 
-- Distinguish documented facts from your observations and inferences; cite sources.
-- Do not use sacred, restricted or identity-bearing forms without informed permission.
-- Expressive line and character families often deserve a commissioned illustrator. Say so, and present your samples as
-  direction, not final art.
-- If you could not render and inspect a file, say so.
+- Distinguish documented facts from observations and inferences; cite sources.
+- Do not use sacred, restricted, or identity-bearing forms without informed permission.
+- Expressive line and character families may deserve a commissioned illustrator. Say so.
+- State when files could not be rendered or inspected.
 
 ## Reference map
 
 | Read | When |
 |---|---|
-| `references/intake.md` | Intake questions and fast-track assumptions |
-| `references/touchpoints.md` | Inventory, tiers, emotional temperature, proof moments |
-| `references/style-families.md` | The eight rendering families: construction, fit, reduction, failure modes, combinations |
-| `references/reference-systems.md` | Case notes: Klarna, Monzo, Cash App, Revolut, Mailchimp, Duolingo, Atlassian, Robinhood, Dropbox, Cowrywise |
-| `references/direction-options.md` | Forming three distinct directions; the overview sheet spec |
-| `references/research-and-translation.md` | Source-world research, scorecard, reference analysis |
-| `references/reference-transfer.md` | Recreating one illustration and applying its direction to a new subject: sRGB prep, seven layers, the rebuild-and-score loop with measurement methods, the kit, role map, first-round failures, presenting three compositions |
-| `references/system-spec-and-validation.md` | Production spec, proof matrix, failure diagnoses |
-| `references/production-prompts.md` | Production routes per family, exploration-only image prompts, known failures |
-| `references/cowrywise-example.md` | One full analysis of a pattern-led system (an example, not a template) |
+| `references/intake.md` | Project-first intake, guidelines, subject brief, and fast-track assumptions |
+| `references/constructive-illustration.md` | The universal layer-by-layer drawing method and subject recipes |
+| `references/touchpoints.md` | Tiers, emotional temperature, and proof moments |
+| `references/style-families.md` | Rendering-family construction, reduction, and failure modes |
+| `references/direction-options.md` | Three distinct options and the overview-sheet specification |
+| `references/research-and-translation.md` | Source research, provenance, reference analysis, and translation |
+| `references/reference-transfer.md` | Measured recreation, rebuild-and-score loop, kit, role map, and new-subject transfer |
+| `references/system-spec-and-validation.md` | Production specification, construction gates, proof matrix, and acceptance tests |
+| `references/production-prompts.md` | Production routes, exploration prompts, and known failures |
+| `references/reference-systems.md` | Reverse-engineer mode only: generic system strategies, never Design-mode ideation |

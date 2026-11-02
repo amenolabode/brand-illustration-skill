@@ -1,5 +1,20 @@
 # System specification and validation
 
+## Construction record
+
+For every complex subject, retain enough of the build that another designer can understand and reproduce it:
+
+- subject model: noun, verb, essential parts, axes/joints, contacts, constraints;
+- composition thumbnails and selected action path;
+- skeleton or structural guides;
+- primitive block and black silhouette;
+- volume, projection and occlusion decisions;
+- clean form before brand surface;
+- branded finish and reduced state.
+
+This record can be one construction sheet rather than separate production files. It is evidence that the style grows
+from a sound subject, not that detail is hiding weak drawing.
+
 ## Required specification
 
 ### Form
@@ -61,6 +76,8 @@ Include simple, emotional and abstract subjects. A system that only handles one 
 
 ## Evaluation questions
 
+- Construction: are proportions, anatomy or mechanics, contacts, projection and occlusion plausible before styling?
+- Brief: does the subject communicate the required action and message in its actual placement?
 - Meaning: does the source reinforce the promise rather than only the category?
 - Recognition: are subjects clear before surface detail is examined?
 - Ownership: is the system identifiable without the logo or primary colour?
@@ -70,6 +87,22 @@ Include simple, emotional and abstract subjects. A system that only handles one 
 - Production: can the team reproduce it reliably?
 - Accessibility: does meaning survive colour and motion constraints?
 - Stewardship: are provenance and permissions documented?
+- Independence: could the result be explained from the project and chosen rules without borrowing the reference's
+  props, composition, palette or metaphor?
+
+## Ordered validation gates
+
+Validate in this order and repair the earliest failure:
+
+1. Subject structure and contact points.
+2. Composition, gesture/action path and UI/copy relationship.
+3. Silhouette and negative space at actual size.
+4. Projection, overlap and occlusion.
+5. Grayscale hierarchy and accessibility.
+6. Brand grammar and ownership without logo/primary colour.
+7. Pattern, material and detail restraint.
+8. Motion cause/effect and reduced state.
+9. Source editability and reproducibility.
 
 ## Failure diagnoses
 
@@ -89,6 +122,17 @@ Create a reduced state. Replace patterns with one structural band, cut or juncti
 
 Consistency has been confused with repetition. Preserve invariants but vary scene type, scale, crop and hierarchy.
 
+### The finish is attractive but the subject feels wrong
+
+Hide colour, pattern, shading and detail. Return to the skeleton, proportions, contact points and primitive masses.
+Correct the earliest structural error, then rebuild later layers.
+
+### The reference is visible in the new work
+
+Separate execution qualities from borrowed content. Keep only justified qualities such as line hierarchy, density,
+projection discipline or motion behaviour. Replace props, composition, palette, metaphor and local details using the
+project brief and subject model.
+
 ### Cultural source feels superficial
 
 Stop production. Revisit provenance, meaning and practitioner involvement or select a different source.
@@ -98,9 +142,11 @@ Stop production. Revisit provenance, meaning and practitioner involvement or sel
 A new designer should be able to receive only the brief and specification, then create an unshown asset that:
 
 1. Is recognizable.
-2. Uses the documented primitives and operations.
-3. Preserves invariants.
-4. Passes the minimum-size state.
-5. Is judged part of the family without relying solely on colour.
+2. Has plausible structure, contacts, proportions and occlusion.
+3. Uses the documented primitives, construction sequence and operations.
+4. Preserves invariants.
+5. Passes the minimum-size and reduced-motion states.
+6. Is judged part of the family without relying solely on colour.
+7. Does not require the original reference to invent its subject or composition.
 
 Review the artifact, not whether the designer repeated document wording.

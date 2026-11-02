@@ -3,14 +3,14 @@
   "evals": [
     {
       "id": 1,
-      "prompt": "We're Bedrock, a savings app. Our promise: small, regular contributions become a durable foundation. We need an illustration system for the app and marketing.",
-      "expected_output": "One intake message (at most five questions) whose first question asks whether the user already has a preferred direction, with options (a) yes, (b) partly, (c) no. No assets are built before the answer, unless the user says to proceed on assumptions.",
+      "prompt": "We're a savings app. Our promise: small, regular contributions become a durable foundation. We need an illustration system for the app and marketing.",
+      "expected_output": "One intake message (at most five questions) that first establishes what the project is, who it is for, and what illustrations must help people understand, feel, or do. It then asks only the missing questions about direction, brand guidelines, subjects/touchpoints, and production. No assets are built before the answer unless the user asks to proceed on explicit provisional assumptions.",
       "files": []
     },
     {
       "id": 2,
-      "prompt": "No direction in mind, just propose. Brand: Bedrock savings app, promise 'small regular contributions become a durable foundation'. Subjects: goal, vault, auto-save, community, statements, verification.",
-      "expected_output": "Three directions in three DIFFERENT rendering families (e.g. flat spot, character-led, soft 3D or pattern-led), at most one pattern-led, each pairing an idea with a family. Each shows a signature element, the same product spot moment (ideally in a phone frame) and the same scene moment from a touchpoint map, plus palette, idea, meaning chain, motion verb and risk, on ONE overview sheet rendered to PNG with a recommendation. Not every asset is an object on a coloured square. The skill stops and offers the full system.",
+      "prompt": "No direction in mind, just propose. Project: savings app; promise: 'small regular contributions become a durable foundation'. Subjects: goal, vault, auto-save, community, statements, verification.",
+      "expected_output": "Before choosing families, creates a closed-book metaphor longlist from current-project evidence, with a chain for each candidate: project fact → shared behaviour → source. It researches and cites the shortlisted real-world sources, scores them, and only then forms three directions in different families, at most one pattern-led. Each shows its evidence chain, construction strip, shared spot and scene, palette, meaning chain, motion verb and risk. The skill stops at the checkpoint.",
       "files": []
     },
     {
@@ -22,31 +22,43 @@
     {
       "id": 4,
       "prompt": "Direction B. Build it.",
-      "expected_output": "The full system for the chosen direction, built by touchpoint tier: micro icons with a reduced state, 6-8 product spots covering functional, sensitive and celebratory moments (no character or joke on sensitive ones), 2-3 scenes, a hero, one real animation with a reduced-motion state, and a spec page with the touchpoint map and construction rules. 2D assets are editable vector, all pass system_audit.py --family <family> with no FAIL, and renders were inspected.",
+      "expected_output": "The selected subjects are first constructed from subject model, composition, skeleton, primitive masses, volume/occlusion and clean form, then receive the chosen brand grammar and finish. The full system is built by touchpoint tier: micro icons with a reduced state, 6-8 product spots across emotional temperatures, 2-3 scenes, a hero, one real animation with a reduced-motion state, and a spec containing construction sheets and rules. 2D assets are editable vector, all pass system_audit.py --family <family> with no FAIL, and renders were inspected.",
       "files": []
     },
     {
       "id": 5,
-      "prompt": "These are Cowrywise's illustrations. What inspired the patterns, and how would I rebuild them layer by layer?",
+      "prompt": "These financial-product illustrations use intricate security-print patterns. What inspired the patterns, and how would I rebuild them layer by layer?",
       "expected_output": "A reference analysis: separate rendering modes, measured palette and pattern weight, the source identified as guilloché security printing and confirmed by the studio's published rationale, layer-by-layer reconstruction, and the execution qualities to keep if the source changes.",
       "files": []
     },
     {
       "id": 6,
-      "prompt": "We're Tally, a bill-splitting app for flatmates. Make illustrations flat and friendly, a bit like Monzo's.",
-      "expected_output": "The skill notices the mismatch: Monzo's current illustration system (2022) is expressive line and character, not flat geometry. It says so in one line and confirms whether the user wants flat geometry or Monzo's energetic, hand-drawn warmth, or proceeds on a stated assumption. Once the family is fixed, the three directions are three different ideas and signatures in that family (same_family set on the sheet), using the reference's lessons, not its look. The touchpoint map covers split requests, settled-up success, an overdue reminder (sensitive) and empty states.",
+      "prompt": "We're a bill-splitting app for flatmates. Make illustrations flat and friendly, but the attached reference is energetic hand-drawn line work.",
+      "expected_output": "The skill notices the mismatch between requested flat geometry and the expressive-line reference. It confirms which quality should lead or proceeds on a stated assumption. Once the family is fixed, the three directions are three different ideas and signatures in that family, using the reference's lessons rather than its look. The touchpoint map covers split requests, settled-up success, an overdue reminder and empty states.",
       "files": []
     },
     {
       "id": 7,
-      "prompt": "Design an illustration system for Kite, a youth investing app. Go straight to directions, no questions.",
-      "expected_output": "States assumptions instead of an intake, including a touchpoint map with tiers and emotional temperature and two proof moments. Writes 'X but not Y' tone fences. Proposes three directions in different families, drawing ideas from at least two wells (the brand's own assets such as logo or type, a source world, a story or cast), and does not default to the Cowrywise/Bedrock pattern-on-object look. Stops at the checkpoint.",
+      "prompt": "Design an illustration system for a youth investing app. Go straight to directions, no questions.",
+      "expected_output": "States a provisional project brief instead of an intake. Generates 8–12 metaphor candidates from at least four current-project facts before opening family guidance, discards category clichés, researches and cites 3–5 candidate sources, and scores them. Only then proposes three directions in different families with construction logic. It does not inspect or borrow repository examples or templates and stops at the checkpoint.",
       "files": []
     },
     {
       "id": 8,
       "prompt": "Recreate this illustration, explain step by step how you did it, then apply the direction to a laptop. [attached: a flat editorial figure with patterned clothing, gifts and a cat on a yellow field]",
-      "expected_output": "Uses the Transfer mode: a seven-layer decomposition (field, large shapes, palette roles, pattern owners, depth by overlap, reward objects, rendering), a recreation used to check the rules and labelled as a study, and a written role map before the laptop is drawn. The laptop keeps pattern owners by role, keeps the frontal projection, replaces the reference's props with objects from the laptop's world, and passes the silhouette test. Raster outputs are run through raster_check.py and reported; the transfer is rebuilt or offered as vector.",
+      "expected_output": "Uses Transfer mode: a seven-layer decomposition, a scored recreation labelled as a study, and a written role map. It generates a new project-local kit from the supplied reference's measured rules rather than opening any inherited template. Before transfer, the laptop is constructed independently from its axes, hinge, screen/deck planes, contacts, primitive silhouette, volume and occlusion. It keeps justified execution qualities but replaces the reference's props, metaphor and composition. It passes silhouette, projection, independence and raster/vector checks.",
+      "files": []
+    },
+    {
+      "id": 9,
+      "prompt": "Create a brand illustration of a courier riding a bicycle with a parcel, then explain the construction.",
+      "expected_output": "Starts from the project/brand and illustration brief. The build establishes bicycle wheels, hubs, bottom bracket, frame, saddle and handlebars; then rider contact points at pelvis/saddle, hands/handlebars and feet/pedals; then spine, joints, masses, frame tubes, overlap, clean silhouette and only afterward clothing, parcel, brand colour/pattern, light and motion. The explanation includes intermediate construction stages and a reduced-size test rather than jumping directly to a styled final.",
+      "files": []
+    },
+    {
+      "id": 10,
+      "prompt": "We make scheduling software for community clinics. The promise is that complicated coordination becomes calm and visible. We have no illustration direction. Research and propose one.",
+      "expected_output": "Extracts evidence from clinic coordination, visibility, calmness, multiple roles, timing and handoffs. Generates a diverse closed-book metaphor longlist with a traceable project-fact chain; rejects generic healthcare symbols and any source recalled from examples. Researches the shortlisted real-world processes themselves—their meaning, construction, operations, provenance and feasibility—with citations. It derives pattern only if a source naturally repeats, then chooses rendering families after metaphor research.",
       "files": []
     }
   ]

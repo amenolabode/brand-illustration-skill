@@ -2,25 +2,22 @@
 
 [![Tests](https://github.com/amenolabode/brand-illustration-skill/actions/workflows/test.yml/badge.svg)](https://github.com/amenolabode/brand-illustration-skill/actions/workflows/test.yml)
 
-![Bedrock example: eight editorial objects built from one rule set](docs/images/03-story-covers.png)
-
 An **Agent Skill** that turns Claude, or any agent that supports skills (Codex, Cursor, Gemini CLI, GitHub Copilot),
-into a disciplined brand illustrator. Give it any brand and it maps where illustrations will live, finds ideas in the
-brand's own assets, a source world or a cast of characters, and draws them in whichever **rendering family** fits:
+into a disciplined brand illustrator. It first understands the project, brand identity, touchpoints and subjects;
+then it derives and researches metaphors from current-project evidence and draws them in whichever **rendering family** fits:
 flat, character-led, expressive line, soft 3D, pattern-led, technical, a brand device or collage.
 
-- **Method:** intake that asks for your preferred direction first, then strategy with "X but not Y" tone fences, a
-  **touchpoint map** (empty states, onboarding, success, errors, heroes) with emotional temperature, and three
-  directions that differ in family, not just colour. The full system is built only after you pick.
-- **Variety by design:** the three options must use different rendering families (unless you fix one, e.g. "line
-  and energy like Monzo"), and at most one may be pattern-led. Lessons from Klarna, Monzo, Cash App, Revolut, Duolingo,
-  Mailchimp, Atlassian, Robinhood, Dropbox and Cowrywise are distilled as principles, never as looks to copy.
+- **Method:** project-first intake, brand-guide synthesis, a **touchpoint and subject map**, closed-book metaphor
+  generation and source research, then three directions. Every selected subject is built from structural guides through
+  primitives, volume, clean form, brand grammar, colour/light/motion and reduction.
+- **Variety by design:** the three options must use different rendering families unless you fix one, and at most one
+  may be pattern-led. Lessons from reference systems are distilled as principles, never as looks to copy.
 - **Vector-first production:** spots, scenes, icons and motion generated from one set of tokens and construction
   rules. 3D comes as a scene kit plus renders. No raster "style samples" passed off as a system.
 - **Dependency-free tools:** an audit that catches the failures that break illustration systems, a three-direction
   overview sheet, and a renderer so the agent looks at its own work.
 
-**Contents:** [How it works](#how-it-works) · [Install](#install) · [Use](#use) · [Example](#example-bedrock) ·
+**Contents:** [How it works](#how-it-works) · [Install](#install) · [Use](#use) ·
 [Rendering families](#rendering-families) · [What the audit catches](#what-the-audit-catches) · [What's inside](#whats-inside) · [Development](#development)
 
 ---
@@ -29,27 +26,40 @@ flat, character-led, expressive line, soft 3D, pattern-led, technical, a brand d
 
 ```mermaid
 flowchart LR
-    A[Intake<br/>preferred direction?<br/>≤ 5 questions] --> B[Strategy<br/>tenet · tone fences]
-    B --> T[Touchpoint map<br/>tiers · temperature ·<br/>2 proof moments]
-    T --> C[Ideas × families<br/>brand assets · source world ·<br/>story or cast]
-    C --> D[Three directions<br/>different families<br/>signature · spot · scene]
+    A[Understand project<br/>audience · job · identity] --> B[Brief<br/>touchpoints · subjects · constraints]
+    B --> C[Metaphor discovery<br/>project facts → shared behaviour<br/>→ candidate sources]
+    C --> R[Source research<br/>meaning · process · provenance<br/>operations · feasibility]
+    R --> D[Three directions<br/>metaphor × family<br/>signature · spot · scene]
     D --> E{{Checkpoint<br/>overview sheet,<br/>recommend, stop}}
-    E -- "you pick and say build" --> F[System by tier<br/>micro · spots · scenes ·<br/>hero · motion · spec]
+    E -- "you pick and say build" --> F[Construct subjects<br/>skeleton · masses · volume ·<br/>brand finish · reduction]
+    F --> G[System by tier<br/>micro · spots · scenes ·<br/>hero · motion · spec]
     E -- "you want changes" --> C
 ```
 
-**It asks before it assumes.** The first intake question is always *"Do you already have a direction in mind?"*:
+**It establishes the project before style.** The first question is *“What is the brand or project, who is it for, and
+what must the illustrations help people understand, feel, or do?”* It then asks only what remains open:
 
-| Your answer | What the three options become |
+| Direction answer | What the three options become |
 |---|---|
-| **Yes, a style or brand**, e.g. "flat like Atlassian's spots", "3D like Cash App" | The family is fixed; three different ideas and signatures within it |
+| **Yes, a style or reference**, e.g. “restrained flat spots” or “soft tactile 3D” | The family is fixed; three different ideas and signatures within it |
 | **Yes, a source**, e.g. "Adire textiles" or "topographic maps" | Three **translations** of your source in different families. Alternatives are suggested in one line, never swapped in. |
 | **Partly**: a feeling, references, things to avoid | Three families that respect your constraints |
 | **No** | Three different families, at least one quiet (flat, technical) and one expressive (character, line, 3D) |
 
 **It always stops at the checkpoint.** The three directions are presented on one overview sheet, with each
-direction's signature element and the same product spot and scene in each so the comparison is fair, plus palette, meaning chain, motion verb,
-an honest risk and a recommendation. Nothing else is built until you choose.
+direction's signature element, construction strip, and the same product spot and scene in each so the comparison is
+fair, plus palette, meaning chain, motion verb, an honest risk and a recommendation. Nothing else is built until you
+choose, unless you ask it to proceed without a checkpoint.
+
+**It knows how to draw the subject, not only style it.** The common construction spine is: subject model → composition
+→ skeleton → primitive masses → volume and occlusion → clean form → brand grammar → colour/light/motion → reduction.
+The same method can build a person on a bicycle, a laptop, a machine, an abstract process or a full scene, while the
+selected rendering family changes what the finished result looks like.
+
+**Examples are isolated from research.** Design mode explicitly prohibits reading repository examples, worked studies,
+templates, style galleries or prior-project metaphors during metaphor generation. Candidates must be generated first
+from current-project facts and carry an evidence chain: `project fact → shared behaviour → candidate source`. The
+source itself is then researched. Rendering families and production scaffolds are considered only afterward.
 
 ---
 
@@ -97,14 +107,14 @@ showing you anything.
 
 Just describe the brand. The skill picks itself up from its description:
 
-> We're Bedrock, a savings app. Small, regular contributions become a durable foundation. We need an illustration
+> We're a savings app. Small, regular contributions become a durable foundation. We need an illustration
 > system for the app and marketing.
 
 > Make our illustrations from Adire textile patterns. We're a Lagos savings cooperative.
 
-> We're Tally, a bill-splitting app. Flat and friendly, like Atlassian's spot illustrations.
+> We're a bill-splitting app. Make the illustrations flat, friendly and useful at product size.
 
-> These are Cowrywise's illustrations. What inspired the patterns, and how would I rebuild them?
+> These illustrations use security-print patterns. What inspired them, and how would I rebuild the system?
 
 > Recreate this illustration, explain how you did it, then apply the direction to a laptop.
 
@@ -118,11 +128,13 @@ and **Audit** (critique illustrations or a direction).
 objects, rendering), then rebuilds it as vector and scores the rebuild against the reference with `match_score.py`,
 measuring what doesn't match (ring centres, stripe periods, dot lattices, contour tapers) until the misses are craft
 rather than missing rules. In the study behind this mode, the score went from 76.6% to 90.3% on figure pixels, and
-every jump came from a rule the first description didn't have. The rules then become a kit
-(`templates/flat_editorial_kit.py`), and three compositions of the new subject are built with it. Each element's
+every jump came from a rule the first description didn't have. The rules then become a new project-local kit generated
+from the supplied reference, and three compositions of the new subject are built with it. Each element's
 *role* is mapped onto the new subject. The striped jumper's role (the largest patterned curve) might go to a laptop's cable loop, and the
-reference's props are replaced with props from the laptop's world rather than copied. A close recreation is treated as
-a study, never a deliverable.
+reference's props are replaced with props from the laptop's world rather than copied. Before the extracted kit is
+applied, the laptop is independently constructed from its axes, hinge, screen/deck planes, silhouette and occlusion.
+A close recreation is treated as a study, never a deliverable. References contribute execution qualities; they do not
+determine the new project's metaphor, composition, palette or content.
 
 ---
 
@@ -130,50 +142,17 @@ a study, never a deliverable.
 
 | Family | Looks like | Studied in |
 |---|---|---|
-| Flat spot | Simple geometric shapes, one accent, product-sized | Atlassian spots, Klarna in-product, Duolingo |
-| Character-led | A cast with fixed proportions and personalities | Duolingo, Monzo |
-| Expressive line | Hand-drawn line, imperfect and human | Monzo, Cash App 2D, Dropbox |
-| Soft 3D | Rendered materials, light, camera | Cash App Evergreen, Revolut |
-| Pattern-led surface | Objects carry a source-world pattern | Cowrywise, Bedrock |
-| Technical | Grids, notation, isometric construction | Robinhood |
-| Brand device | One recurring shape or object carries the story | Mailchimp's Cube, Klarna's type-built shapes |
-| Collage | Mixed photo, texture and drawing | Atlassian marketing |
+| Flat spot | Simple geometric shapes, one accent, product-sized | Product states and compact explanatory moments |
+| Character-led | A cast with fixed proportions and personalities | Habit, encouragement, community and emotion |
+| Expressive line | Hand-drawn line, imperfect and human | Editorial storytelling and human viewpoint |
+| Soft 3D | Rendered materials, light, camera | Tactile feature explanation and campaigns |
+| Pattern-led surface | Objects carry a meaningful source-world pattern | Security print, textiles, maps and material processes |
+| Technical | Grids, notation, isometric construction | Expert tools, processes and data abstraction |
+| Brand device | One recurring shape or object carries the story | Motion-heavy suites with strong existing geometry |
+| Collage | Mixed photo, texture and drawing | Campaign, editorial and social work |
 
 Each has construction rules, the touchpoints it suits, how it reduces to small sizes and how it fails
 (`references/style-families.md`). Families can pair by tier, e.g. flat spots in product and 3D heroes in marketing.
-
-**Starter templates.** `templates/flat-spot-template.mjs` builds flat spots with a primitive-built character, in
-celebratory, functional and sensitive moments, plus a phone-frame context render:
-
-![Flat spot template: payment sent, empty state, card frozen, in a phone frame](docs/images/flat-spot-template.png)
-
-`templates/build-template.mjs` builds a pattern-led system (the Bedrock example below).
-
-**Why the families exist.** An early run for a brand called Scan produced three directions that were all a patterned
-object on a coloured square. The skill had only one worked example, a pattern slot on its sheet and an audit that
-warned when a pattern was missing. Those were all removed or made family-aware.
-
----
-
-## Example: Bedrock (pattern-led)
-
-A fictional savings brand, *"wealth is deposited layer by layer"*, built on sedimentary stratigraphy. The whole family
-is generated by [`examples/bedrock/build.mjs`](examples/bedrock/build.mjs) from one palette, one 96×36 bedding tile
-and three construction functions. Open [`examples/bedrock/index.html`](examples/bedrock/index.html) for the spec page.
-
-**Technical scene:** isometric, wireframe → volume → material. The account rests on strata plates.
-![Technical scene in three states](docs/images/01-technical-scene-states.png)
-
-**Pictograms:** flat, generated at three tiers from one definition.
-![Six pictograms at display, standard and micro sizes](docs/images/02-product-icons.png)
-
-**How this skill was hardened.** The first Bedrock run used an image model. The meaning chain was right, but the
-output had thick stripes over every shape, one clay material across all modes, five equal-weight colours, rendered
-lighting, a crack in a different place on every object, and a GIF sliced from a storyboard. That run self-certified
-because it checked its prompts, not its pixels. The spec page shows v1 and v2 side by side. Those failures became the
-skill's rules, its red-flag list and `system_audit.py`.
-
----
 
 ## What the audit catches
 
@@ -211,27 +190,23 @@ skills/brand-illustration-systems/
 ├── SKILL.md                         workflow, checkpoint, chat format, red flags
 ├── agents/openai.yaml               Codex display metadata
 ├── references/
-│   ├── intake.md                    the preferred-direction question, brief questions, assumptions
+│   ├── intake.md                    project-first brief, guidelines, subjects, direction, assumptions
+│   ├── constructive-illustration.md universal subject construction + human-on-bike worked example
 │   ├── touchpoints.md               inventory, tiers, emotional temperature, proof moments
 │   ├── style-families.md            the eight rendering families
-│   ├── reference-systems.md         case notes on Klarna, Monzo, Cash App, Revolut, Duolingo and others
+│   ├── reference-systems.md         anonymised system patterns and transferable lessons
 │   ├── direction-options.md         making three options truly different; sheet spec
-│   ├── research-and-translation.md  source research, scorecard, worksheet, reference analysis
+│   ├── research-and-translation.md  clean-slate metaphor generation, source research and translation
 │   ├── reference-transfer.md        recreate one illustration and apply it to a new subject
 │   ├── system-spec-and-validation.md  production spec, proof matrix, failure diagnoses
 │   ├── production-prompts.md        production route per family, exploration-only prompts, known failures
-│   └── cowrywise-example.md         a full analysis of one pattern-led reference system
 ├── scripts/
 │   ├── direction_sheet.py           three-option overview sheet (HTML) from JSON
 │   ├── system_audit.py              family-aware audit for SVGs
 │   ├── raster_check.py              flat-field and palette check for raster exploration
 │   ├── render_png.py                SVG/HTML → PNG (Chrome, rsvg-convert, cairosvg, Inkscape); silhouette, grey
 │   └── match_score.py               score a vector recreation against its reference (Transfer)
-└── templates/
-    ├── flat-spot-template.mjs       flat spots + primitive character + phone-frame context
-    ├── build-template.mjs           pattern-led: tokens → pattern → per-mode construction → motion
-    └── flat_editorial_kit.py        flat editorial grammar: stripes, radial rings, dot ribbons, contours, overlaps
-examples/bedrock/                    complete worked run with spec page
+examples/layered-savings/            development-only validation fixture; excluded from the packaged skill
 evals/evals.json                     behaviour evals (intake, varied families, fixed family, translations, build, analysis, transfer)
 tools/                               smoke test and packaging
 tests/                               unit tests
@@ -247,9 +222,9 @@ python3 -m unittest discover -s tests -v     # audit logic and SKILL.md contract
 python3 tools/package_skill.py               # dist/brand-illustration-systems.zip
 ```
 
-CI runs both on Linux, macOS and Windows. Contributions are welcome: new reference analyses, rendering families, templates,
-audit checks and worked examples, especially from non-Western source worlds, with provenance documented.
+CI runs on Linux, macOS and Windows. Repository examples are development fixtures and are not included in the packaged
+skill or read during Design-mode research.
 
 ## License
 
-[MIT](LICENSE). Brand names in the reference analyses belong to their owners and are discussed for study only.
+[MIT](LICENSE).
