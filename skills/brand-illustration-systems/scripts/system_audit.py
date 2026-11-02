@@ -6,6 +6,8 @@
 
 Checks are judged against the rendering family (see references/style-families.md):
   flat, technical, device, pattern   rasters and filters FAIL; gradients WARN; one saturated anchor hue
+  editorial                          rasters and filters FAIL; one gradient allowed (the depth plane), more WARN;
+                                     up to four saturated hues held to roles; no <pattern> needed (stripes are shapes)
   character                          rasters FAIL; filters and gradients WARN; up to two saturated hues
   line                               rasters and filters WARN (texture is allowed); up to two saturated hues
   3d, collage                        rasters, filters and gradients allowed; up to two (3d) or three (collage) hues
@@ -85,6 +87,7 @@ PROFILES = {
     "technical": ("fail", "fail", "warn", 1, False),
     "device":    ("fail", "fail", "warn", 1, False),
     "pattern":   ("fail", "fail", "warn", 1, True),
+    "editorial": ("fail", "fail", "many", 4, False),
     "character": ("fail", "warn", "warn", 2, False),
     "line":      ("warn", "warn", None, 2, False),
     "3d":        (None, None, None, 2, False),
@@ -114,7 +117,11 @@ def audit(path, family="flat", max_anchor=None):
         flag(raster_lvl, f"embedded raster image: a {family} asset should be vector")
     if "filter" in tags or any(e.get("filter") for e in els) or re.search(r"filter\s*:\s*(drop-shadow|blur|url)", raw):
         flag(filter_lvl, f"filter found (drop shadow / blur / lighting): {family} uses construction, not rendering effects")
-    if "linearGradient" in tags or "radialGradient" in tags:
+    n_grad = tags.count("linearGradient") + tags.count("radialGradient")
+    if grad_lvl == "many":
+        if n_grad > 1:
+            res["warn"].append(f"{n_grad} gradients: {family} keeps one, on the plane pushed back for depth")
+    elif n_grad:
         flag(grad_lvl, f"gradient found: unusual for the {family} family; keep it only if the direction calls for it")
     if "text" in tags:
         res["warn"].append("live <text>: outline it, or confirm the font ships with the asset")

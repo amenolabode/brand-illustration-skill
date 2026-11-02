@@ -1,91 +1,172 @@
-# Reference transfer: recreate a piece, then apply its direction to a new subject
+# Reference transfer: learn a piece by rebuilding it, then apply it to a new subject
 
 Use this when the user shares a single illustration (not a whole system) and asks you to recreate it, explain how it
-works, or "do this, but for a laptop / our product / our brand". The reference is the preferred direction, so skip the
-three-direction stage for the style itself. Offer three **subject compositions** instead if the user wants options.
+works, or "do this, but for a laptop / our product / our brand". The reference is the preferred direction, so the
+style is fixed; the options you show are three **subject compositions** in that style.
 
-A finished transfer has three parts: a **decomposition** (the rules, written down), a **recreation** that proves the
-rules are complete, and a **transfer** that proves they generalise. If the recreation needs rules the decomposition
-doesn't contain, the decomposition is wrong. Fix it before you transfer.
+The method is an illustrator's apprenticeship, not a description exercise: **measure → rebuild → score → iterate**
+until the vector matches, then write down what the match taught you, package it as a kit, and only then draw the new
+subject with that kit. Describing a style in adjectives and then drawing "something like it" fails every time: the
+rules that make a style read are numeric (angles, periods, radii, which colour owns which pattern) and you only find
+them by trying to reproduce the piece and seeing where you miss.
 
-## 1. Decompose in seven layers
+A finished transfer has four parts:
+
+1. a **decomposition** (seven layers, written as rules with numbers);
+2. a **recreation** scored against the reference, which proves the rules are complete;
+3. a **kit** (`templates/flat_editorial_kit.py` for the flat editorial family) holding those rules as functions;
+4. a **transfer**: three options for the new subject built with the kit, self-critiqued, presented on one sheet.
+
+**Study, not shipping.** A close recreation of a living illustrator's piece is a study for understanding. Keep it out
+of deliverables and public repos, never present it as the brand's or your own original work. If the user wants that
+exact look for production, recommend commissioning the illustrator.
+
+## 1. Prepare the reference
+
+- **Convert to sRGB first.** Screenshots and exports often carry a display profile (`raster_check.py` warns on an
+  embedded profile). Raw pixel values from such a file are not the colours you see: in the worked example, the green
+  read as #4FA968 raw and is #03AC61 in sRGB, and the field read as #FBF38E but is #FFF47C. Convert with
+  `sips --matchTo "/System/Library/ColorSync/Profiles/sRGB Profile.icc" in.png --out in-srgb.png` (macOS) or Pillow
+  `ImageCms`, then take every hex from the converted file.
+- **Build the palette** by snapping pixels to the dominant colours (`match_score.py` does this when you omit
+  `--palette`). Expect 8–12 colours in a flat editorial piece; name each by its **role**, not its hue.
+- **Work at the reference's pixel size** so your coordinates are its coordinates.
+
+## 2. Decompose in seven layers
 
 Work from the largest decisions to the smallest. Write each layer as rules, not adjectives.
 
-| Layer | What to record | Example (flat editorial figure with gifts) |
+| Layer | What to record | Worked example (flat editorial figure with gifts, 2252 px square) |
 |---|---|---|
-| 1. Field | Canvas ratio, background treatment, how much of the canvas the subject fills | Square; one uniform butter-yellow field; figure fills about two-thirds |
-| 2. Large shapes | The subject reduced to 5–12 primitives, with their exaggeration | Face and arms as pink wedges, hair as two black teardrops, torso as a curled disc around a counter-shape, legs as sweeping ribbons, mitten hands |
-| 3. Palette roles | Each colour's job, not just its hex | Yellow = negative space; black = structure and anchor; blue, green, pink, mint, cyan = subjects and patterns |
-| 4. Pattern owners | Which pattern belongs to which plane, and its scale | Broad black/blue stripes = sweater; mint dots = front trousers; green dots on navy = back leg; thin black/white stripes = gift lid; large white dots = pink box; thin green contour = hair |
-| 5. Depth | How things sit in front of each other with no shading | Overlap only: hair over face, arms across torso, legs crossing, objects cropped by the canvas. No shadows, no gradients |
-| 6. Rewards | The small secondary objects and what they do for the composition | Hearts, snowflakes, leaves, ribbons and a cat distribute colour around the silhouette and reward a second look |
-| 7. Rendering | Edges, outlines, texture, projection | Crisp vector edges, no outlines, frontal flat projection; black shapes act as boundaries where needed |
+| 1. Field | Ratio, background, how much the subject fills | Square; one flat yellow #FFF47C; the figure fills about two-thirds |
+| 2. Large shapes | The subject as 5–12 primitives, with exaggeration | Arms are rings and quarter-rings, the torso is a striped band, the head is cut by one diagonal, the legs are long ribbons, the cat is a rectangle with a semicircle cut out |
+| 3. Palette roles | Each colour's job | Yellow = negative space; black = structure and overlaps; blue = the main patterned plane; pink = calm rest planes; navy = the one shaded plane |
+| 4. Pattern owners | Which pattern sits on which role, at what scale | Broad stripes = body and arms; mint dots = the front leg; dots on navy = the back leg; pinstripes = the gift lid; white polka = the pink box; green tapered contours = the hair |
+| 5. Depth | How things sit in front of each other | Mostly overlap. Where two shapes overlap, the overlap turns black. **One** gradient, a dark radial on the back leg, pushes it behind |
+| 6. Rewards | Small secondary objects and their job | Hearts, snowflake, leaves, gifts and the cat spread colour around the silhouette |
+| 7. Rendering | Edges, outlines, projection | Crisp edges, no outlines, frontal flat projection |
 
-Then separate three things that are easy to blur together:
+Separate three things that are easy to blur: **subject recognition** (what makes the subject readable),
+**brand geometry** (the shape language) and **surface pattern** (what fills the planes). A transfer keeps the second
+and third and rebuilds the first for the new subject.
 
-- **Subject recognition:** what makes the subject readable (silhouette, proportions, one or two key details).
-- **Brand geometry:** the shape language (wedges, teardrops, ribbons, counter-shapes).
-- **Surface pattern:** what fills the planes.
+## 3. Rebuild and score: the loop
 
-A good transfer keeps the second and third and rebuilds the first for the new subject.
+Rebuild the reference as vector, layer by layer, largest shapes first. After each layer, render and score:
 
-## 2. Recreate to check the rules
+```bash
+python3 scripts/match_score.py recreation.svg reference-srgb.png --palette "#FFF47C,#0081C7,#000000,..."
+```
 
-Rebuild the reference from the written rules, as vector where possible. Compare side by side at the same size and list
-mismatches by layer. An image model can produce a quick visual check, but label it exploration. In the run this
-method comes from, the model added a soft glow to a field that was perfectly uniform. Image models drift on exactly the
-things a flat style depends on.
+It reports overall agreement, agreement on figure pixels only (ignoring the field, which inflates the overall number),
+IoU for each colour (worst first: this tells you which layer is off) and the worst cells of a 6×6 grid (this tells you
+where to look). Open the diff image: red means in the reference but missing from yours, blue means extra in yours.
 
-**Study, not shipping.** A close recreation of a living illustrator's piece is a study for understanding. Never ship
-it, publish it as the brand's work or present it as original. If the user wants that exact look for production,
-recommend commissioning the illustrator.
+**Measure, don't eyeball.** When a colour's IoU is low, crop that region of the reference and measure it:
 
-## 3. Transfer roles, not objects
+- **Primitives.** Fit circles to curved edges. Arcs that look freehand are usually a ring with a centre and two radii.
+  In the worked example, the curled arm is one ring (centre 1100,750; radii 275/140) and the raised arm is a quarter
+  ring (radii 343/215). One diagonal, x = 1404 − y/2, cuts the fringe, face and neck in a single line.
+- **Stripe periods.** Read the band edges along a scanline. Stripes follow the primitive they sit on: they are
+  horizontal on the torso, vertical (59 px) on the straight forearm, and radial on the ring arms (16.2° on the curled
+  arm, 11° on the raised arm).
+- **Dot lattices.** Find the lattice with FFT autocorrelation, then refine with a regression along chains of
+  neighbouring dots. The leg dots sit in fixed-direction columns at 56.45° (step 47.62 px; columns 38.6 px apart; odd
+  columns shifted −9.4 px; r ≈ 9). **The grid never bends with the form**, and there is a seam where the fill was
+  placed in two patches. A uniform-lattice guess scored a median error of 12 px; per-column phases fitted it to
+  sub-pixel accuracy.
+- **Contours.** Measure width along the line. The hair contours taper from 6 to 12 px toward the hair's outer edge,
+  like a brush, and start on the diagonal edge.
+- **Anything you can't model** (drips, ribbon tails, hand outlines): trace the region boundary and simplify it to a
+  few smooth points. Use a traced shape as the outline only; the pattern inside still comes from the rules.
 
-Write a role map before drawing. Every element of the reference has a **role** in the composition. Find the element
-of the new subject that can play that role.
+**Iterate until the remaining misses are craft, not rules.** The worked example went from 76.6% → 85.1% → 89.6% →
+90.25% agreement on figure pixels (96.9% overall). Each jump came from a rule that wasn't in the written
+decomposition: the ring construction, the per-column dot model, the sRGB conversion, the overlap-turns-black rule and
+the gradient on the back leg. Write each rule back into the decomposition when you find it. That is the point of the
+loop. Stop when the misses left are hand-placed details (individual drips, a ribbon curl) rather than missing rules.
+
+## 4. Package the rules as a kit
+
+Turn the rules into functions in one file, with every size as a fraction of canvas width so they work at any size.
+For flat editorial, start from `templates/flat_editorial_kit.py`: `stripes` (horizontal or vertical), `radial` (ring
+stripes), `dots` (fixed-direction column lattice), `polka`, `pinstripe`, `contour` (tapered, sized to its shape),
+`overlap` (the overlap turns the anchor colour), `deep_gradient` (the one shaded plane), plus `ribbon`, `sector`,
+`smooth`, `heart` and `capsule` primitives. The palette is held as roles (`field, anchor, main, calm, light, cool,
+accent, pop, deep`); for a brand, swap the hexes and keep the roles. For another family, write the same kind of kit
+from that reference's measurements.
+
+## 5. Transfer roles, not objects
+
+Write a role map before drawing. Every element of the reference has a **role**; find the element of the new subject
+that can play it.
 
 | Reference element | Its role | Laptop element |
 |---|---|---|
-| Black hair with green contour | Dark anchor shape carrying the finest line pattern | Black screen with thin green contour lines |
-| Striped sweater curling round a counter-shape | Largest patterned plane; makes the main curve | An app window or cable loop with the broad stripes, curving round open space |
-| Pink face and hands | Large calm colour planes that rest the eye | Pink trackpad, or a pink case |
-| Dotted trouser ribbon | Long sweeping movement across the canvas | Charging cable as a sweeping ribbon with the dot pattern |
-| Boots with white cuffs | Terminal shapes that end a movement | Connector with a white collar |
-| Gift lid stripes | Narrow, busy texture on a small plane | Keyboard |
-| Gifts, cat, snowflakes, hearts | Rewards: secondary objects that spread colour | **New props from the laptop's world:** a mug, sticky notes, headphones, a plant, a notification heart |
+| Black hair with green contours | Dark anchor carrying the finest line pattern | Black screen with tapered accent contours |
+| Striped arm curling round a counter-shape | Largest patterned plane; makes the main curve | A coiled cable or headband with radial stripes round open space |
+| Pink face and hands | Calm planes that rest the eye | A pink window on the screen; hands at the keyboard |
+| Dotted leg ribbon | Long sweeping movement | The charging cable as a dotted ribbon |
+| Back leg in the navy gradient | The one plane pushed back | The cable run that passes behind the laptop |
+| Boots with white cuffs | Terminal shapes ending a movement | A plug with a white collar |
+| Gift-lid pinstripes | Busy texture on a small plane | The keyboard deck |
+| Gifts, cat, snowflake, hearts | Rewards that spread colour | **New props from the laptop's world:** mug, plant, books, headphones, a notification heart |
 
 Rules:
 
-- **Keep pattern owners stable.** Once a pattern belongs to a role (broad stripes = the main curve), it keeps that role
-  in every new subject. Don't redistribute patterns at random.
-- **Replace the rewards.** Copying the reference's props (gifts, cat, cake) into a new subject is the most common
-  failure: the result reads as the old picture with a laptop pasted in. Props must come from the new subject's world.
-  Keep their role (small, scattered, colour-spreading), not their identity.
-- **Keep the projection.** If the reference is frontal and flat, the new subject is frontal and flat too. Don't let a
-  three-quarter perspective creep in because the subject is usually drawn that way.
-- **Keep the silhouette clean.** A transferred pattern ribbon must not cross the subject's key recognition feature
-  (for a laptop: the hinge line, the screen edge, the keyboard deck).
+- **Keep pattern owners stable.** Once a pattern belongs to a role, it keeps that role in every new subject.
+- **Replace the rewards by role, not by identity.** Copying the reference's props reads as the old picture with a
+  laptop pasted in. Watch for disguised copies too: a book wearing the gift's ribbon cross and knot is still the gift.
+- **Keep the projection.** Frontal reference, frontal result. To give the subject energy, lean it in-plane by rotation
+  (4–6°); never add perspective.
+- **Give it the reference's movement.** The worked example is one big S-curve through about two-thirds of the canvas.
+  A subject parked in the middle with props around it is static even when every pattern is right.
+- **Keep the silhouette clean.** A pattern ribbon must not cross the subject's key recognition feature (for a laptop:
+  the hinge line, the screen edge, the keyboard deck).
 
-## 4. Checks before showing
+**What failed in the worked example's first laptop round**, and its fix:
+
+| Failure | Fix |
+|---|---|
+| Big flat black masses (screen, keyboard) that read as holes | Black stays an anchor but carries a pattern or contour, or is broken by a calm plane (the pink window) |
+| Contours invisible, because they were sized to the canvas | Size contours to the shape they sit on (`contour(..., size=shape_width)`) |
+| Static layout: laptop centred, props scattered round it | One big S-curve movement (cable, headband or arms) through two-thirds of the canvas |
+| A coil floating on its own, not connected to anything | Every shape joins the movement: the cable leaves the laptop, coils, and ends in the plug |
+| No depth | One run passes behind in the deep gradient, as the back leg does |
+| A book copied from the gift (ribbon cross and knot) | A pink book with page-edge capsules and a spine band: its own world's details |
+| Silhouette test lost the striped shapes | Patterned fills must use the shape's own path as the base, never a full-canvas rect |
+
+## 6. Present the transfer as three options
+
+Build three compositions of the new subject with the kit, all in the same style. They differ in **idea and movement**,
+not in style. In the worked example these were a cable coil, headphones over books, and hands at work. For each,
+build the same two moments: a **spot** (subject only, no rewards, at product size) and a **scene** (full composition).
+Then render the sheet with `direction_sheet.py`, setting `"same_family": true` so it labels them as compositions in
+one family rather than three families.
+
+Before showing anything, critique your own sheet against the reference, side by side at the same size, with the
+round-one table above as a checklist. Fix what fails and render again. Then present it in the checkpoint format in
+SKILL.md, with a recommendation.
+
+## 7. Checks before showing
 
 | Check | How | Pass when |
 |---|---|---|
-| Large-shape test | `render_png.py --silhouette` (all fills black) and `--grey` | The subject is recognisable as a silhouette, and composition still works before pattern and colour |
+| Match score (recreation) | `match_score.py recreation.svg reference-srgb.png` | Remaining misses are hand-placed details, not missing rules |
+| Large-shape test | `render_png.py --silhouette` and `--grey` | The subject is recognisable as a silhouette; the composition works before pattern and colour |
 | Pattern-owner test | Compare the role map with the artwork | Every pattern sits on the role it owns in the reference |
-| Prop test | List every secondary object | None is carried over from the reference unless it belongs to the new subject's world |
-| Projection test | Compare horizon and angle | Same projection as the reference |
-| Flat-field test | `raster_check.py image.png` for raster exploration; for vector, the background is one solid `<rect>` | Field variation under the threshold; no glow, vignette or gradient |
-| Palette test | `raster_check.py` reports dominant colours; `system_audit.py --family pattern` for SVG | Same palette roles as the reference, no stray hues |
+| Prop test | List every secondary object | None carried over from the reference, including disguised copies |
+| Projection test | Compare horizon and angle | Same projection; any lean is an in-plane rotation |
+| Movement test | Trace the main curve across the composition | One continuous movement through about two-thirds of the canvas |
+| Flat-field and palette | `raster_check.py` (raster), `system_audit.py --family editorial` (SVG) | No glow or vignette; four saturated hues at most, each in its role; at most one gradient |
 
-## Worked example: what the Codex laptop run got right and wrong
+## Worked example: what an earlier image-model run got right and wrong
 
-**Right:** the seven-layer decomposition; pattern owners mostly transferred by role (screen took the hair's contour
-lines, keyboard took the gift-lid stripes, cable took the dotted-trouser ribbon); the laptop reads from its silhouette;
-a background correction pass after spotting the glow.
+**Right:** the seven-layer decomposition; pattern owners mostly transferred by role (the screen took the hair's
+contours, the keyboard took the gift-lid stripes, the cable took the dotted ribbon); a background correction pass after
+spotting a glow.
 
-**Wrong:** the gift, cat, cake, hearts and snowflakes were copied from the reference, which broke its own "transfer roles,
-not objects" rule; the laptop slipped into three-quarter perspective while the reference is frontal; the striped
-ribbon crossed the keyboard, the laptop's key recognition feature; and the output was raster only, so it was exploration
-rather than a reusable system. Rebuild the transfer as vector from the role map before calling it done.
+**Wrong:** it never rebuilt the reference, so its rules were adjectives and it couldn't tell what it was missing. The
+gift, cat, cake, hearts and snowflakes were copied into the laptop scene, and the laptop slipped into three-quarter
+perspective. A striped ribbon crossed the keyboard. The output was raster only (exploration, not a system), and the
+image model added a soft glow to a field that is perfectly flat.

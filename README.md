@@ -114,9 +114,13 @@ It works in five modes: **Design** (new system), **Reverse-engineer** (analyse a
 (recreate one illustration and apply its direction to a new subject), **Extend** (new assets for an existing system)
 and **Audit** (critique illustrations or a direction).
 
-**Transfer** breaks a reference into seven layers (field, large shapes, palette roles, pattern owners, depth by
-overlap, reward objects, rendering), recreates it to prove the rules are complete, then maps each element's *role* onto
-the new subject. The striped jumper's role (the largest patterned curve) might go to a laptop's cable loop, and the
+**Transfer** breaks a reference into seven layers (field, large shapes, palette roles, pattern owners, depth, reward
+objects, rendering), then rebuilds it as vector and scores the rebuild against the reference with `match_score.py`,
+measuring what doesn't match (ring centres, stripe periods, dot lattices, contour tapers) until the misses are craft
+rather than missing rules. In the study behind this mode, the score went from 76.6% to 90.3% on figure pixels, and
+every jump came from a rule the first description didn't have. The rules then become a kit
+(`templates/flat_editorial_kit.py`), and three compositions of the new subject are built with it. Each element's
+*role* is mapped onto the new subject. The striped jumper's role (the largest patterned curve) might go to a laptop's cable loop, and the
 reference's props are replaced with props from the laptop's world rather than copied. A close recreation is treated as
 a study, never a deliverable.
 
@@ -173,13 +177,14 @@ skill's rules, its red-flag list and `system_audit.py`.
 
 ## What the audit catches
 
-`python3 scripts/system_audit.py --family flat|character|line|3d|pattern|technical|device|collage assets/*.svg`
+`python3 scripts/system_audit.py --family flat|editorial|character|line|3d|pattern|technical|device|collage assets/*.svg`
 
 The rules follow the family: a filter is a failure in a flat spot but fine in a 3D or collage asset.
 
 | Family | Rasters | Filters | Gradients | Saturated hues |
 |---|---|---|---|---|
 | flat, technical, device, pattern | FAIL | FAIL | WARN | 1 |
+| editorial (bold flat figurative) | FAIL | FAIL | one allowed, more WARN | 4 |
 | character | FAIL | WARN | WARN | 2 |
 | line | WARN | WARN | allowed | 2 |
 | 3d / collage | allowed | allowed | allowed | 2 / 3 |
@@ -193,7 +198,9 @@ Two more checks:
   `--grey` renders it in greyscale.
 - `raster_check.py image.png` checks image-model exploration for what flat styles depend on. It FAILs a background
   with a glow, vignette or gradient, WARNs one that is noisy rather than one solid fill, and lists the dominant
-  colours.
+  colours. It also WARNs when the PNG carries a non-sRGB colour profile, because hexes sampled from it are wrong.
+- `match_score.py recreation.svg reference.png` scores a vector rebuild against its reference: agreement, IoU per
+  colour, the worst regions and a diff image.
 
 ---
 
@@ -218,10 +225,12 @@ skills/brand-illustration-systems/
 │   ├── direction_sheet.py           three-option overview sheet (HTML) from JSON
 │   ├── system_audit.py              family-aware audit for SVGs
 │   ├── raster_check.py              flat-field and palette check for raster exploration
-│   └── render_png.py                SVG/HTML → PNG (Chrome, rsvg-convert, cairosvg, Inkscape); silhouette, grey
+│   ├── render_png.py                SVG/HTML → PNG (Chrome, rsvg-convert, cairosvg, Inkscape); silhouette, grey
+│   └── match_score.py               score a vector recreation against its reference (Transfer)
 └── templates/
     ├── flat-spot-template.mjs       flat spots + primitive character + phone-frame context
-    └── build-template.mjs           pattern-led: tokens → pattern → per-mode construction → motion
+    ├── build-template.mjs           pattern-led: tokens → pattern → per-mode construction → motion
+    └── flat_editorial_kit.py        flat editorial grammar: stripes, radial rings, dot ribbons, contours, overlaps
 examples/bedrock/                    complete worked run with spec page
 evals/evals.json                     behaviour evals (intake, varied families, fixed family, translations, build, analysis, transfer)
 tools/                               smoke test and packaging

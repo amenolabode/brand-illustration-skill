@@ -8,12 +8,16 @@ palette. This samples the image border to find the field colour (the
 median colour), then finds every field-coloured pixel in the image and reports how solid it is and whether its
 brightness shifts across the canvas, plus the dominant colours (quantised).
 FAIL when the field shifts between regions (glow, vignette, gradient); WARN when it is noisy rather than one solid
-colour, or when many small colour clusters compete.
+colour, or when many small colour clusters compete. WARN when the PNG carries a colour profile: its raw pixel values
+are not sRGB, so hexes sampled from it are wrong (a green read as #4FA968 is #03AC61 in sRGB). Convert first:
+  sips --matchTo "/System/Library/ColorSync/Profiles/sRGB Profile.icc" in.png --out in-srgb.png    (macOS)
+  or Pillow: ImageCms.profileToProfile(im, embedded_profile, ImageCms.createProfile("sRGB"))
 
 Reads 8-bit, non-interlaced PNG (greyscale, RGB, RGBA, palette). Standard library only.
 """
 import argparse
 import json
+import re
 import struct
 import sys
 import zlib
@@ -76,8 +80,39 @@ def read_png(path):
     return w, h, px
 
 
+def color_profile(path):
+    """Name of an embedded non-sRGB ICC profile (iCCP chunk), or None."""
+    with open(path, "rb") as f:
+        data = f.read()
+    pos = 8
+    while pos + 8 <= len(data):
+        n, kind = struct.unpack(">I4s", data[pos:pos + 8])
+        if kind == b"iCCP":
+            body = data[pos + 8:pos + 8 + n]
+            name, _, rest = body.partition(b"\x00")
+            try:
+                icc = zlib.decompress(rest[1:])
+            except zlib.error:
+                icc = b""
+            if b"sRGB" in icc[:4096] or b"s\x00R\x00G\x00B" in icc[:4096]:
+                return None
+            text = re.search(rb"(?:\x00[ -~]){3,60}", icc[128:])
+            return text.group(0).decode("utf-16-be").strip() if text else name.decode("latin-1") or "unnamed"
+        if kind in (b"IDAT", b"IEND"):
+            return None
+        pos += 12 + n
+    return None
+
+
 def check(path, tolerance=6, max_colors=10):
     res = {"file": path, "fail": [], "warn": [], "info": []}
+    try:
+        prof = color_profile(path)
+    except OSError:
+        prof = None
+    if prof:
+        res["warn"].append(f"embedded colour profile '{prof}': raw pixel values are not sRGB, so sampled hexes will be "
+                           f"off; convert to sRGB before taking colours from this file")
     try:
         w, h, px = read_png(path)
     except Exception as e:

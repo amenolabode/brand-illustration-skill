@@ -21,7 +21,7 @@ Reply in the user's language. Keep the process visible but light: short explanat
 |---|---|---|
 | A new illustration system | **Design**: full workflow below | Phase 1 |
 | To understand or replicate a reference system | **Reverse-engineer** | `references/research-and-translation.md` §Reference analysis, `references/reference-systems.md` |
-| To recreate one illustration and apply its direction to a new subject ("do this, but for a laptop") | **Transfer** | `references/reference-transfer.md`: decompose in seven layers, recreate to check the rules, map roles, rebuild for the new subject |
+| To recreate one illustration and apply its direction to a new subject ("do this, but for a laptop") | **Transfer** | `references/reference-transfer.md`: decompose in seven layers, rebuild the reference as vector and score it with `match_score.py` until the misses are craft rather than rules, package the rules as a kit, then build three compositions of the new subject with it |
 | New assets for an existing system | **Extend** | Read their spec and touchpoint map, then Phase 7 for only the requested assets |
 | Feedback on illustrations or a direction | **Audit** | `references/system-spec-and-validation.md`, `scripts/system_audit.py` |
 
@@ -40,13 +40,16 @@ Run them with `python3` and the full path; on Windows use `python` or `py -3`.
 | Script | Use it to |
 |---|---|
 | `direction_sheet.py` | Build the three-option overview: each direction's family, signature element, the same spot moment and the same scene moment, palette, idea, rules and risk, with a recommendation |
-| `system_audit.py` | Check SVG assets against the chosen family (`--family flat|character|line|3d|pattern|technical|device|collage`): rasters, filters, gradients, colour discipline, pattern weight where relevant |
+| `system_audit.py` | Check SVG assets against the chosen family (`--family flat|editorial|character|line|3d|pattern|technical|device|collage`): rasters, filters, gradients, colour discipline, pattern weight where relevant. `editorial` is bold flat figurative work: up to four saturated hues held to roles, one gradient for the depth plane |
 | `render_png.py` | Render SVG or HTML to PNG (headless Chrome/Chromium, rsvg-convert, cairosvg, Inkscape) so you can look at your work; `--silhouette` and `--grey` for the large-shape and value tests |
-| `raster_check.py` | Check raster exploration (image-model PNGs) for a background that isn't one solid fill (glow, vignette, noise) and a smeared palette |
+| `raster_check.py` | Check raster exploration (image-model PNGs) for a background that isn't one solid fill (glow, vignette, noise) and a smeared palette; warns when a PNG carries a non-sRGB colour profile, so its sampled hexes would be wrong |
+| `match_score.py` | Score a vector recreation against its reference: agreement, per-colour IoU, the worst regions and a diff image. The loop that turns "make it match" into a number |
 
-Templates (Node, no dependencies): `templates/flat-spot-template.mjs` (flat spot illustrations with a primitive-built
-character and one accent) and `templates/build-template.mjs` (pattern-led system with isometric scene and extruded
-objects). Use them as structure, not as looks to copy.
+Templates (no dependencies): `templates/flat-spot-template.mjs` (flat spot illustrations with a primitive-built
+character and one accent), `templates/build-template.mjs` (pattern-led system with isometric scene and extruded
+objects) and `templates/flat_editorial_kit.py` (Python: the flat editorial grammar measured in a Transfer study:
+striped and radial planes, fixed-direction dot ribbons, tapered contours, overlaps that turn black, one depth
+gradient, palette by role). Use them as structure, not as looks to copy.
 
 **Look at your work.** Render after every meaningful change, open the PNGs and actually look. If you cannot render,
 say so. Never claim a check you did not run.
@@ -135,6 +138,12 @@ alike, replace one. Present in the format under "Presenting directions in chat" 
 
 Mixing parts of two directions is allowed. Name the combined invariants so the result does not become a collage.
 
+**In Transfer mode** the style is fixed, so the three options are three compositions of the new subject in that style,
+differing in idea and movement. Build them with the kit you extracted (not freehand), render the same spot and scene
+moment for each, and set `"same_family": true` on the sheet. Before showing the sheet, critique it beside the
+reference at the same size, using the failure table in `references/reference-transfer.md` §5. Fix what fails, then
+present it with a recommendation and wait, as above.
+
 ### Phase 7: Build the system (only after the user picks)
 
 Build what the touchpoint map needs, by default:
@@ -196,8 +205,13 @@ Run `system_audit.py` with the family on every asset, render everything and chec
 - Drop shadows, gradients or filters used to rescue weak forms in a flat family; inconsistent camera or lighting in 3D.
 - Imitating a living illustrator's or studio's signature style; labelling an invented motif as belonging to a culture.
   A close recreation of someone's piece is a study, never a deliverable.
-- In a transfer: the reference's props copied into the new subject, patterns moved off the roles they own, or the
-  projection changed (frontal reference, three-quarter result).
+- In a transfer: the reference's props copied into the new subject (including disguised copies, like a book wearing
+  the gift's ribbon), patterns moved off the roles they own, or the projection changed (frontal reference,
+  three-quarter result).
+- In a transfer: describing the style in adjectives without rebuilding and scoring the reference; sampling hexes from
+  a PNG with a display colour profile; contours sized to the canvas instead of their shape (they vanish); black masses
+  with no pattern or calm plane breaking them; a subject parked mid-canvas with props around it instead of one big
+  movement.
 
 ## Honesty and limits
 
@@ -217,7 +231,7 @@ Run `system_audit.py` with the family on every asset, render everything and chec
 | `references/reference-systems.md` | Case notes: Klarna, Monzo, Cash App, Revolut, Mailchimp, Duolingo, Atlassian, Robinhood, Dropbox, Cowrywise |
 | `references/direction-options.md` | Forming three distinct directions; the overview sheet spec |
 | `references/research-and-translation.md` | Source-world research, scorecard, reference analysis |
-| `references/reference-transfer.md` | Recreating one illustration and applying its direction to a new subject: seven layers, role map, checks |
+| `references/reference-transfer.md` | Recreating one illustration and applying its direction to a new subject: sRGB prep, seven layers, the rebuild-and-score loop with measurement methods, the kit, role map, first-round failures, presenting three compositions |
 | `references/system-spec-and-validation.md` | Production spec, proof matrix, failure diagnoses |
 | `references/production-prompts.md` | Production routes per family, exploration-only image prompts, known failures |
 | `references/cowrywise-example.md` | One full analysis of a pattern-led system (an example, not a template) |
